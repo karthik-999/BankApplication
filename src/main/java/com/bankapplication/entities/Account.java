@@ -33,7 +33,7 @@ public class Account {
 	private Long balance;
 
 	@OneToMany(cascade = CascadeType.ALL ,orphanRemoval = true)
-	@JoinColumn(referencedColumnName = "accountId")
+	@JoinColumn(name = "beneficiaryAccount",referencedColumnName = "accountId")
 //	@JsonIgnore
 	private List<Beneficiery> beneficiaryAccounts;
 

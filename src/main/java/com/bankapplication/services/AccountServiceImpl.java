@@ -47,7 +47,7 @@ public class AccountServiceImpl implements IAccountService {
 		AccountDetailsResponseDTO accountDetailsResponseDTO = new AccountDetailsResponseDTO();
 		account = accountUtilities.copyPropertiesFromDTOToEntity(accountDTO, account);
 		if (account != null && account.getAccountNumber() == null) {
-			account.setAccountNumber(UUID.randomUUID().randomUUID().toString().substring(0, 9));
+			account.setAccountNumber(UUID.randomUUID().toString().substring(0, 9));
 		}
 		if (account.getBeneficiaryAccounts() != null) {
 			for (Beneficiery beneficiaryAccount : account.getBeneficiaryAccounts()) {
