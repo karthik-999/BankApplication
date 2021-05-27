@@ -33,35 +33,33 @@ public class AccountController {
 
 	@PostMapping("/add/account")
 	public ResponseEntity<AccountDetailsResponseDTO> addAccount(@RequestBody AccountDetailsDTO accountDetails) {
-		AccountDetailsResponseDTO accountDetailsResponse = accountService.saveAccount(accountDetails);
-		return new ResponseEntity<AccountDetailsResponseDTO>(accountDetailsResponse, HttpStatus.CREATED);
-	}
-
-	@GetMapping("/get/accounts")
-	public ResponseEntity<List<AccountDetailsResponseDTO>> getAccounts() {
-
-		List<AccountDetailsResponseDTO> accounts = accountService.getAllAccounts();
-		return new ResponseEntity<List<AccountDetailsResponseDTO>>(accounts, HttpStatus.OK);
-	}
-
-	@GetMapping("/get/account/{accountId}")
-	public ResponseEntity<Account> getAccount(@PathVariable Long accountId) {
-		Account account = accountService.getAccount(accountId);
-		return new ResponseEntity<Account>(account, HttpStatus.OK);
+		AccountDetailsResponseDTO accountDetailsResponseDTO = accountService.saveAccount(accountDetails);
+		return new ResponseEntity<>(accountDetailsResponseDTO, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/update/account")
 	public ResponseEntity<AccountDetailsResponseDTO> updateAccount(@RequestBody AccountDetailsDTO accountDetails) {
 		AccountDetailsResponseDTO accountDetailsResponseDTO = accountService.saveAccount(accountDetails);
-		return new ResponseEntity<AccountDetailsResponseDTO>(accountDetailsResponseDTO, HttpStatus.OK);
+		return new ResponseEntity<>(accountDetailsResponseDTO, HttpStatus.OK);
 
 	}
 
-	@DeleteMapping("/delete/account")
-	public ResponseEntity<ResponseMessage> deleteAccount(@PathVariable Long accountId) {
+	@GetMapping("/get/accounts")
+	public ResponseEntity<List<AccountDetailsResponseDTO>> getAccounts() {
+		List<AccountDetailsResponseDTO> accounts = accountService.getAllAccounts();
+		return new ResponseEntity<>(accounts, HttpStatus.OK);
+	}
 
+	@GetMapping("/get/account/{accountId}")
+	public ResponseEntity<Account> getAccount(@PathVariable Long accountId) {
+		Account account = accountService.getAccount(accountId);
+		return new ResponseEntity<>(account, HttpStatus.OK);
+	}
+
+	@DeleteMapping("/delete/account/{accountId}")
+	public ResponseEntity<ResponseMessage> deleteAccount(@PathVariable Long accountId) {
 		accountService.deleteAccount(accountId);
-		return new ResponseEntity<ResponseMessage>(new ResponseMessage("Successfully Deleted"), HttpStatus.OK);
+		return new ResponseEntity<>(new ResponseMessage("Successfully Deleted"), HttpStatus.OK);
 	}
 
 	// Add Beneficiary

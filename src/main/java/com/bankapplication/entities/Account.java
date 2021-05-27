@@ -32,7 +32,7 @@ public class Account {
 	@Column
 	private Long balance;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL ,orphanRemoval = true)
 	@JoinColumn(referencedColumnName = "accountId")
 //	@JsonIgnore
 	private List<Beneficiery> beneficiaryAccounts;

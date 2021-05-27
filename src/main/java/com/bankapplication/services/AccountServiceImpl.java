@@ -51,7 +51,9 @@ public class AccountServiceImpl implements IAccountService {
 		}
 		if (account.getBeneficiaryAccounts() != null) {
 			for (Beneficiery beneficiaryAccount : account.getBeneficiaryAccounts()) {
-				beneficiaryAccount.setBeneficieryNumber(UUID.randomUUID().toString().substring(9, 19));
+				if(beneficiaryAccount.getBeneficieryAccountNumber() == null) {
+					beneficiaryAccount.setBeneficieryNumber(UUID.randomUUID().toString().substring(9, 19));
+				}
 			}
 		}
 		account = accountRepository.save(account);
@@ -72,9 +74,10 @@ public class AccountServiceImpl implements IAccountService {
 
 	@Override
 	public void deleteAccount(Long accountId) {
-		Optional<Account> account = accountRepository.findByAccountId(accountId);
-		if (account.isPresent()) {
-			accountRepository.delete(account.get());
+		Optional<Account> accountWrapper = accountRepository.findByAccountId(accountId);
+		if (accountWrapper.isPresent()) {
+			Account account = accountWrapper.get();
+			accountRepository.delete(account);
 		}
 
 	}
