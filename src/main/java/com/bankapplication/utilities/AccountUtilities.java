@@ -22,7 +22,7 @@ public class AccountUtilities {
 		accountDetailsResponseDTO.setAccountNumber(account.getAccountNumber());
 		accountDetailsResponseDTO.setBalance(account.getBalance());
 		accountDetailsResponseDTO.setUser(account.getUser());
-		List<Beneficiery> beneficieryAccounts = new ArrayList();
+		List<Beneficiery> beneficieryAccounts = new ArrayList<>();
 		for(Beneficiery beneficieryAccount: account.getBeneficiaryAccounts()) {
 			Beneficiery beneficieryAccountResponse = new Beneficiery();
 			beneficieryAccountResponse.setBeneficieryAccountNumber(beneficieryAccount.getBeneficieryAccountNumber());
@@ -39,7 +39,7 @@ public class AccountUtilities {
 		account.setAccountNumber(accountDetailsResponseDTO1.getAccountNumber());
 		account.setBalance(accountDetailsResponseDTO1.getBalance());
 		account.setUser(accountDetailsResponseDTO1.getUser());
-		List<Beneficiery> beneficieryAccounts = new ArrayList();
+		List<Beneficiery> beneficieryAccounts = new ArrayList<>();
 		for(Beneficiery beneficieryAccount: accountDetailsResponseDTO1.getBeneficiaryAccounts()) {
 			Beneficiery beneficieryAccountResponse = new Beneficiery();
 			beneficieryAccountResponse.setBeneficieryAccountNumber(beneficieryAccount.getBeneficieryAccountNumber());
@@ -56,7 +56,7 @@ public class AccountUtilities {
 		accountDetailsResponseDTO.setAccountNumber(accountDetailsDTO.getAccountNumber());
 		accountDetailsResponseDTO.setBalance(accountDetailsDTO.getBalance());
 		accountDetailsResponseDTO.setUser(accountDetailsDTO.getUser());
-		List<Beneficiery> beneficieryAccounts = new ArrayList();
+		List<Beneficiery> beneficieryAccounts = new ArrayList<>();
 		if(accountDetailsDTO.getBeneficiaryAccounts() != null) {
 			for(Beneficiery beneficieryAccount: accountDetailsDTO.getBeneficiaryAccounts()) {
 				Beneficiery beneficieryAccountResponse = new Beneficiery();
