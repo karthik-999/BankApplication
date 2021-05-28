@@ -58,6 +58,9 @@ public class Account {
 		return beneficiaryAccounts;
 	}
 
+	
+	
+	
 	public User getUser() {
 		return user;
 	}
