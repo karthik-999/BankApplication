@@ -44,19 +44,24 @@ public class AccountServiceImpl implements IAccountService {
 	@Override
 	public AccountDetailsResponseDTO saveAccount(@Valid AccountDetailsDTO accountDTO) {
 		Account account = new Account();
-		AccountDetailsResponseDTO accountDetailsResponseDTO = new AccountDetailsResponseDTO();
+		AccountDetailsResponseDTO accountDetailsResponseDTO = null;
 		account = accountUtilities.copyPropertiesFromDTOToEntity(accountDTO, account);
-		if (account != null && account.getAccountNumber() == null) {
-			account.setAccountNumber(UUID.randomUUID().toString().substring(0, 9));
-		}
-		if (account.getBeneficiaryAccounts() != null) {
-			for (Beneficiery beneficiaryAccount : account.getBeneficiaryAccounts()) {
-				if(beneficiaryAccount.getBeneficieryAccountNumber() == null) {
-					beneficiaryAccount.setBeneficieryNumber(UUID.randomUUID().toString().substring(9, 19));
+		if(account != null) {
+			if (account.getAccountNumber() == null) {
+				account.setAccountNumber(UUID.randomUUID().toString().substring(0, 9));
+			}
+			if (account.getBeneficiaryAccounts() != null) {
+				for (Beneficiery beneficiaryAccount : account.getBeneficiaryAccounts()) {
+					if(beneficiaryAccount.getBeneficieryAccountNumber() == null) {
+						beneficiaryAccount.setBeneficieryNumber(UUID.randomUUID().toString().substring(9, 19));
+					}
 				}
 			}
+			
+			account = accountRepository.save(account);
+			
 		}
-		account = accountRepository.save(account);
+		
 		accountDetailsResponseDTO = accountUtilities.copyPropertiesFromEntityToDTO(account);
 		return accountDetailsResponseDTO;
 
@@ -64,7 +69,7 @@ public class AccountServiceImpl implements IAccountService {
 
 	@Override
 	public List<AccountDetailsResponseDTO> getAllAccounts() {
-		List<AccountDetailsResponseDTO> accountResponse = new ArrayList<AccountDetailsResponseDTO>();
+		List<AccountDetailsResponseDTO> accountResponse = new ArrayList<>();
 		List<Account> accounts = accountRepository.findAll();
 		for (Account account : accounts) {
 			accountResponse.add(accountUtilities.copyPropertiesFromEntityToDTO(account));

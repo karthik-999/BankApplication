@@ -2,8 +2,6 @@ package com.bankapplication.services.interfaces;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import com.bankapplication.entities.Account;
 import com.bankapplication.requests.AccountDetailsDTO;
 import com.bankapplication.responses.AccountDetailsResponseDTO;

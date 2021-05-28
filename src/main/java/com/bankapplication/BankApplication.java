@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class BankApplication {
 
-	//changes added to test-branch git repo
 	public static void main(String[] args) {
 		SpringApplication.run(BankApplication.class, args);
 	}
@@ -17,7 +16,6 @@ public class BankApplication {
 	//Added Bean - Developer 
 	 @Bean
 	    public ModelMapper modelMapper(){
-	        ModelMapper modelMapper = new ModelMapper();
-	        return modelMapper;
+	        return new ModelMapper();
 	    }
 }

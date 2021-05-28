@@ -17,8 +17,9 @@ public class AccountDetailsResponseDTO {
 
 	private User user;
 
+	
 	public AccountDetailsResponseDTO() {
-
+		super();
 	}
 
 	public Long getAccountId() {

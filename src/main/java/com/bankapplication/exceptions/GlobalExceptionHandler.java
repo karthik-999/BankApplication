@@ -32,6 +32,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 			details.add(error.getDefaultMessage());
 		}
 		ErrorResponseDetails error = new ErrorResponseDetails("Validation Failed", details);
-		return new ResponseEntity(error, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
 	}
 }

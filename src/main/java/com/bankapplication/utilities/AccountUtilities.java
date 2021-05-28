@@ -22,7 +22,7 @@ public class AccountUtilities {
 		accountDetailsResponseDTO.setAccountNumber(account.getAccountNumber());
 		accountDetailsResponseDTO.setBalance(account.getBalance());
 		accountDetailsResponseDTO.setUser(account.getUser());
-		List<Beneficiery> beneficieryAccounts = new ArrayList<Beneficiery>();
+		List<Beneficiery> beneficieryAccounts = new ArrayList();
 		for(Beneficiery beneficieryAccount: account.getBeneficiaryAccounts()) {
 			Beneficiery beneficieryAccountResponse = new Beneficiery();
 			beneficieryAccountResponse.setBeneficieryAccountNumber(beneficieryAccount.getBeneficieryAccountNumber());
@@ -34,21 +34,21 @@ public class AccountUtilities {
 		return accountDetailsResponseDTO;
 	}
 	
-	public Account copyPropertiesFromDTOToEntity(AccountDetailsResponseDTO account,Account accountDetailsResponseDTO) {
-		accountDetailsResponseDTO.setAccountId(accountDetailsResponseDTO.getAccountId());
-		accountDetailsResponseDTO.setAccountNumber(accountDetailsResponseDTO.getAccountNumber());
-		accountDetailsResponseDTO.setBalance(accountDetailsResponseDTO.getBalance());
-		accountDetailsResponseDTO.setUser(accountDetailsResponseDTO.getUser());
-		List<Beneficiery> beneficieryAccounts = new ArrayList<Beneficiery>();
-		for(Beneficiery beneficieryAccount: accountDetailsResponseDTO.getBeneficiaryAccounts()) {
+	public Account copyPropertiesFromDTOToEntity(AccountDetailsResponseDTO accountDetailsResponseDTO1,Account account) {
+		account.setAccountId(accountDetailsResponseDTO1.getAccountId());
+		account.setAccountNumber(accountDetailsResponseDTO1.getAccountNumber());
+		account.setBalance(accountDetailsResponseDTO1.getBalance());
+		account.setUser(accountDetailsResponseDTO1.getUser());
+		List<Beneficiery> beneficieryAccounts = new ArrayList();
+		for(Beneficiery beneficieryAccount: accountDetailsResponseDTO1.getBeneficiaryAccounts()) {
 			Beneficiery beneficieryAccountResponse = new Beneficiery();
 			beneficieryAccountResponse.setBeneficieryAccountNumber(beneficieryAccount.getBeneficieryAccountNumber());
 			beneficieryAccountResponse.setBeneficieryId(beneficieryAccount.getBeneficieryId());
 			beneficieryAccountResponse.setBeneficieryNumber(beneficieryAccount.getBeneficieryNumber());
 			beneficieryAccounts.add(beneficieryAccountResponse);
 		}
-		accountDetailsResponseDTO.setBeneficiaryAccounts(beneficieryAccounts);
-		return accountDetailsResponseDTO;
+		account.setBeneficiaryAccounts(beneficieryAccounts);
+		return account;
 	}
 	
 	public Account copyPropertiesFromDTOToEntity(AccountDetailsDTO accountDetailsDTO,Account accountDetailsResponseDTO) {
@@ -56,7 +56,7 @@ public class AccountUtilities {
 		accountDetailsResponseDTO.setAccountNumber(accountDetailsDTO.getAccountNumber());
 		accountDetailsResponseDTO.setBalance(accountDetailsDTO.getBalance());
 		accountDetailsResponseDTO.setUser(accountDetailsDTO.getUser());
-		List<Beneficiery> beneficieryAccounts = new ArrayList<Beneficiery>();
+		List<Beneficiery> beneficieryAccounts = new ArrayList();
 		if(accountDetailsDTO.getBeneficiaryAccounts() != null) {
 			for(Beneficiery beneficieryAccount: accountDetailsDTO.getBeneficiaryAccounts()) {
 				Beneficiery beneficieryAccountResponse = new Beneficiery();
