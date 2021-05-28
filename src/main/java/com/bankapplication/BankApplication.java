@@ -12,6 +12,9 @@ public class BankApplication {
 		SpringApplication.run(BankApplication.class, args);
 	}
 
+	
+	
+	//Added Bean - Developer
 	 @Bean
 	    public ModelMapper modelMapper(){
 	        ModelMapper modelMapper = new ModelMapper();
