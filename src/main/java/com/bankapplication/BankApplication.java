@@ -13,7 +13,6 @@ public class BankApplication {
 	}
 
 	
-	
 	//Added Bean - Developer
 	 @Bean
 	    public ModelMapper modelMapper(){
