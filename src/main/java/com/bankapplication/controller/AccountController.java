@@ -63,7 +63,6 @@ public class AccountController {
 	}
 
 	// Add Beneficiary
-	
 	// Update beneficiaries
 	// Delete Beneficiary
 	// Get Beneficiaries
@@ -93,7 +92,7 @@ public class AccountController {
 				}
 			}
 			return new ResponseEntity<>(
-					new ResponseMessage("Check Request Details - Account should be Beneficiary to transfer Money"),	HttpStatus.BAD_REQUEST);
+					new ResponseMessage("Check Request Details - Account should be in Beneficiary to transfer Money"),	HttpStatus.BAD_REQUEST);
 
 		}
 
