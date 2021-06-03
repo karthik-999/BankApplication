@@ -18,6 +18,7 @@ import org.mockito.MockitoAnnotations;
 import com.bankapplication.entities.Account;
 import com.bankapplication.entities.Beneficiery;
 import com.bankapplication.repositories.AccountRepository;
+import com.bankapplication.responses.AccountDetailsResponseDTO;
 import com.bankapplication.services.interfaces.IAccountService;
 
 class AccountServiceImplTest {
@@ -50,7 +51,7 @@ class AccountServiceImplTest {
 		Optional<Account> optionalAccount = Optional.of(account);
 		when(accountRepository.findByAccountId(Mockito.any(Long.class))).thenReturn(optionalAccount);
 
-		Account mockedAccount = accountService.getAccount(1L);
+		AccountDetailsResponseDTO mockedAccount = accountService.getAccount(1L);
 		assertNotNull(mockedAccount);
 		assertEquals("1AID1ZG", mockedAccount.getAccountNumber());
 	}
