@@ -43,16 +43,16 @@ class AccountServiceImplTest {
 		List<Beneficiery> beneficieryAccounts = new ArrayList<>();
 		Beneficiery beneficieryaccount = new Beneficiery();
 		beneficieryaccount.setBeneficieryId(3L);
-//		beneficieryaccount.setBeneficieryAccountNumber(account);
+		beneficieryaccount.setBeneficieryAccountNumber(account);
 		beneficieryaccount.setBeneficieryNumber("1Z1GZAG3");
 		beneficieryAccounts.add(beneficieryaccount);
 		account.setBeneficiaryAccounts(beneficieryAccounts);
 		Optional<Account> optionalAccount = Optional.of(account);
 		when(accountRepository.findByAccountId(Mockito.any(Long.class))).thenReturn(optionalAccount);
 
-//		Account mockedAccount = accountService.getAccount(1L);
-//		assertNotNull(mockedAccount);
-//		assertEquals("1AID1ZG", mockedAccount.getAccountNumber());
+		Account mockedAccount = accountService.getAccount(1L);
+		assertNotNull(mockedAccount);
+		assertEquals("1AID1ZG", mockedAccount.getAccountNumber());
 	}
 
 }

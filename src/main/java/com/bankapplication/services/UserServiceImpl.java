@@ -12,7 +12,6 @@ import com.bankapplication.entities.Account;
 import com.bankapplication.entities.User;
 import com.bankapplication.repositories.UserRepository;
 import com.bankapplication.requests.UserDetailsDTO;
-import com.bankapplication.responses.AccountDetailsResponseDTO;
 import com.bankapplication.responses.UserDetailsResponseDTO;
 import com.bankapplication.services.interfaces.IUserService;
 
@@ -41,17 +40,13 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public List<UserDetailsResponseDTO> getAllUsers() {
-		List<User> users = new ArrayList<>();
 		List<UserDetailsResponseDTO> userDetailsResponseDTOs = new ArrayList<>();
-		users = userRepository.findAll();
+		List<User> users = userRepository.findAll();
 		for (User user : users) {
 			UserDetailsResponseDTO userDetailsResponseDTO = new UserDetailsResponseDTO();
 			BeanUtils.copyProperties(user, userDetailsResponseDTO);
-			UserDetailsResponseDTO userResponseDTO = new UserDetailsResponseDTO();
-			userResponseDTO = userDetailsResponseDTO;
-			userDetailsResponseDTOs.add(userResponseDTO);
+			userDetailsResponseDTOs.add(userDetailsResponseDTO);
 		}
-//		BeanUtils.copyProperties(users, userDetailsResponseDTOs);
 		return userDetailsResponseDTOs;
 	}
 

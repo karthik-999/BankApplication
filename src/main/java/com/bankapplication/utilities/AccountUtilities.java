@@ -25,7 +25,7 @@ public class AccountUtilities {
 		List<Beneficiery> beneficieryAccounts = new ArrayList<>();
 		for(Beneficiery beneficieryAccount: account.getBeneficiaryAccounts()) {
 			Beneficiery beneficieryAccountResponse = new Beneficiery();
-			//beneficieryAccountResponse.setBeneficieryAccountNumber(beneficieryAccount.getBeneficieryAccountNumber());
+			beneficieryAccountResponse.setBeneficieryAccountNumber(beneficieryAccount.getBeneficieryAccountNumber());
 			beneficieryAccountResponse.setBeneficieryId(beneficieryAccount.getBeneficieryId());
 			beneficieryAccountResponse.setBeneficieryNumber(beneficieryAccount.getBeneficieryNumber());
 			beneficieryAccounts.add(beneficieryAccountResponse);
@@ -42,7 +42,7 @@ public class AccountUtilities {
 		List<Beneficiery> beneficieryAccounts = new ArrayList<>();
 		for(Beneficiery beneficieryAccount: accountDetailsResponseDTO1.getBeneficiaryAccounts()) {
 			Beneficiery beneficieryAccountResponse = new Beneficiery();
-			//beneficieryAccountResponse.setBeneficieryAccountNumber(beneficieryAccount.getBeneficieryAccountNumber());
+			beneficieryAccountResponse.setBeneficieryAccountNumber(beneficieryAccount.getBeneficieryAccountNumber());
 			beneficieryAccountResponse.setBeneficieryId(beneficieryAccount.getBeneficieryId());
 			beneficieryAccountResponse.setBeneficieryNumber(beneficieryAccount.getBeneficieryNumber());
 			beneficieryAccounts.add(beneficieryAccountResponse);
@@ -60,7 +60,7 @@ public class AccountUtilities {
 		if(accountDetailsDTO.getBeneficiaryAccounts() != null) {
 			for(Beneficiery beneficieryAccount: accountDetailsDTO.getBeneficiaryAccounts()) {
 				Beneficiery beneficieryAccountResponse = new Beneficiery();
-				//beneficieryAccountResponse.setBeneficieryAccountNumber(beneficieryAccount.getBeneficieryAccountNumber());
+				beneficieryAccountResponse.setBeneficieryAccountNumber(beneficieryAccount.getBeneficieryAccountNumber());
 				beneficieryAccountResponse.setBeneficieryId(beneficieryAccount.getBeneficieryId());
 				beneficieryAccountResponse.setBeneficieryNumber(beneficieryAccount.getBeneficieryNumber());
 				beneficieryAccounts.add(beneficieryAccountResponse);

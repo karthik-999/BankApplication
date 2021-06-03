@@ -26,8 +26,6 @@ import com.bankapplication.responses.BeneficiaryDetailsResponseDTO;
 import com.bankapplication.responses.ResponseMessage;
 import com.bankapplication.services.interfaces.IAccountService;
 
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
 @RestController
 @RequestMapping("/accounts")
 public class AccountController {
@@ -35,21 +33,18 @@ public class AccountController {
 	@Autowired
 	IAccountService accountService;
 
-	/*
-	 * @PostMapping("/account/add") public ResponseEntity<AccountDetailsResponseDTO>
-	 * addAccount(@RequestBody AccountDetailsDTO accountDetails) {
-	 * AccountDetailsResponseDTO accountDetailsResponseDTO =
-	 * accountService.saveAccount(accountDetails); return new
-	 * ResponseEntity<>(accountDetailsResponseDTO, HttpStatus.CREATED); }
-	 * 
-	 * @PutMapping("/account/update") public
-	 * ResponseEntity<AccountDetailsResponseDTO> updateAccount(@RequestBody
-	 * AccountDetailsDTO accountDetails) { AccountDetailsResponseDTO
-	 * accountDetailsResponseDTO = accountService.saveAccount(accountDetails);
-	 * return new ResponseEntity<>(accountDetailsResponseDTO, HttpStatus.OK);
-	 * 
-	 * }
-	 */
+	@PostMapping("/account/add")
+	public ResponseEntity<AccountDetailsResponseDTO> addAccount(@RequestBody AccountDetailsDTO accountDetails) {
+		AccountDetailsResponseDTO accountDetailsResponseDTO = accountService.saveAccount(accountDetails);
+		return new ResponseEntity<>(accountDetailsResponseDTO, HttpStatus.CREATED);
+	}
+
+	@PutMapping("/account/update")
+	public ResponseEntity<AccountDetailsResponseDTO> updateAccount(@RequestBody AccountDetailsDTO accountDetails) {
+		AccountDetailsResponseDTO accountDetailsResponseDTO = accountService.saveAccount(accountDetails);
+		return new ResponseEntity<>(accountDetailsResponseDTO, HttpStatus.OK);
+
+	}
 
 	@GetMapping("/all")
 	public ResponseEntity<List<AccountDetailsResponseDTO>> getAccounts() {
@@ -71,7 +66,8 @@ public class AccountController {
 
 	// add beneficiary
 	@PutMapping("/beneficiary/add")
-	public ResponseEntity<BeneficiaryDetailsResponseDTO> updateAccount(@RequestBody AddBeneficiaryDetailsDTO accountDetails) {
+	public ResponseEntity<BeneficiaryDetailsResponseDTO> updateAccount(
+			@RequestBody AddBeneficiaryDetailsDTO accountDetails) {
 		BeneficiaryDetailsResponseDTO accountDetailsResponseDTO = accountService.updateAccount(accountDetails);
 		return new ResponseEntity<>(accountDetailsResponseDTO, HttpStatus.OK);
 	}
@@ -94,14 +90,17 @@ public class AccountController {
 						Long userBalance = userAccount.getBalance() - requestDetails.getAmount();
 						userAccount.setBalance(userBalance);
 						accountService.saveAccount(userAccount);
-						return new ResponseEntity<>(new ResponseMessage("Succesfully transferred Money to Beneficiery Account"),HttpStatus.OK);
+						return new ResponseEntity<>(
+								new ResponseMessage("Succesfully transferred Money to Beneficiery Account"),
+								HttpStatus.OK);
 
 					}
 
 				}
 			}
 			return new ResponseEntity<>(
-					new ResponseMessage("Check Request Details - Account should be in Beneficiary to transfer Money"),	HttpStatus.BAD_REQUEST);
+					new ResponseMessage("Check Request Details - Account should be in Beneficiary to transfer Money"),
+					HttpStatus.BAD_REQUEST);
 
 		}
 

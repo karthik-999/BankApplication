@@ -13,10 +13,7 @@ import com.bankapplication.responses.BeneficiaryDetailsResponseDTO;
 public class BeneficieryController {
 
 	
-//	// Add Beneficiary
-//	public ResponseEntity<BeneficiaryDetailsResponseDTO>addBeneficiary(@RequestBody BeneficiaryDetailsDTO beneficiaryDetailsDTO){
-//		
-//	}
+	// Add Beneficiary
 	// Update beneficiaries
 	// Delete Beneficiary
 	// Get Beneficiaries

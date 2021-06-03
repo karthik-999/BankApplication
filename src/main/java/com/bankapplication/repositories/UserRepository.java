@@ -8,7 +8,5 @@ import com.bankapplication.entities.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-	//jpaRepositories sample
-//		public Optional<Account> findByAccountId(Long accontId);
 
 }

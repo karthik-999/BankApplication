@@ -13,7 +13,7 @@ public class UserDetailsResponseDTO {
 
 	private String password;
 
-	private List<Account> userAccounts = new ArrayList<Account>();
+	private List<Account> userAccounts = new ArrayList<>();
 
 
 	public UserDetailsResponseDTO() {

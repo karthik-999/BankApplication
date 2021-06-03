@@ -3,9 +3,7 @@ package com.bankapplication.requests;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bankapplication.entities.Account;
 import com.bankapplication.entities.Beneficiery;
-import com.bankapplication.entities.User;
 
 public class AddBeneficiaryDetailsDTO {
 

@@ -13,9 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bankapplication.entities.Account;
-import com.bankapplication.entities.Beneficiery;
 import com.bankapplication.repositories.AccountRepository;
-import com.bankapplication.repositories.UserRepository;
 import com.bankapplication.requests.AccountDetailsDTO;
 import com.bankapplication.requests.AddBeneficiaryDetailsDTO;
 import com.bankapplication.responses.AccountDetailsResponseDTO;
@@ -53,16 +51,6 @@ public class AccountServiceImpl implements IAccountService {
 		if(account != null) {
 			if (account.getAccountNumber() == null) {
 				account.setAccountNumber(UUID.randomUUID().toString().substring(0, 9));
-			}
-//			if (account.getBeneficiaryAccounts() != null) {
-//				for (Beneficiery beneficiaryAccount : account.getBeneficiaryAccounts()) {
-//					if(beneficiaryAccount.getBeneficieryAccountNumber() == null) {
-//						beneficiaryAccount.setBeneficieryNumber(UUID.randomUUID().toString().substring(9, 19));
-//					}
-//				}
-//			}
-			if(account.getUser() == null) {
-				
 			}
 			account = accountRepository.save(account);
 			
@@ -110,20 +98,25 @@ public class AccountServiceImpl implements IAccountService {
 	}
 
 	@Override
-	public BeneficiaryDetailsResponseDTO updateAccount(AddBeneficiaryDetailsDTO accountDetails) {
+	public BeneficiaryDetailsResponseDTO updateAccount(AddBeneficiaryDetailsDTO beneficiaryDetails) {
 		
 		Account account = new Account();
 		Account accountDB = new Account();
 
 		BeneficiaryDetailsResponseDTO beneficiaryDetailsResponseDTO = new BeneficiaryDetailsResponseDTO();
-		if(accountDetails != null && accountDetails.getAccountId() != null) {
-			 accountDB = getByAccount(accountDetails.getAccountId());
+		if(beneficiaryDetails != null && beneficiaryDetails.getAccountId() != null) {
+			 accountDB = getByAccount(beneficiaryDetails.getAccountId());
 		}
 		if(accountDB.getUser() != null) {
 			account.setUser(accountDB.getUser());
 		}
-		BeanUtils.copyProperties(accountDetails, account);
-		account = accountRepository.save(account);
+		if(beneficiaryDetails != null) {
+			BeanUtils.copyProperties(beneficiaryDetails, account);
+			account = accountRepository.save(account);	
+		}else {
+			account = accountDB;
+		}
+		
 		BeanUtils.copyProperties(account, beneficiaryDetailsResponseDTO);
 		return beneficiaryDetailsResponseDTO;
 	}

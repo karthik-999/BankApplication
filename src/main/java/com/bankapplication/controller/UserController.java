@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bankapplication.requests.UserDetailsDTO;
-import com.bankapplication.responses.AccountDetailsResponseDTO;
 import com.bankapplication.responses.UserDetailsResponseDTO;
 import com.bankapplication.services.interfaces.IUserService;
 
