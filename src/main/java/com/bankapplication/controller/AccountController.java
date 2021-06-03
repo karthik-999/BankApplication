@@ -33,13 +33,13 @@ public class AccountController {
 	IAccountService accountService;
 
 	
-	@PostMapping("/account/add")
+	@PostMapping("/add")
 	public ResponseEntity<AccountDetailsResponseDTO> addAccount(@RequestBody AccountDetailsDTO accountDetails) {
 		var accountDetailsResponseDTO = accountService.saveAccount(accountDetails);
 		return new ResponseEntity<>(accountDetailsResponseDTO, HttpStatus.CREATED);
 	}
 
-	@PutMapping("/account/update")
+	@PutMapping("/update")
 	public ResponseEntity<AccountDetailsResponseDTO> updateAccount(@RequestBody AccountDetailsDTO accountDetails) {
 		var accountDetailsResponseDTO = accountService.saveAccount(accountDetails);
 		return new ResponseEntity<>(accountDetailsResponseDTO, HttpStatus.OK);
@@ -57,6 +57,7 @@ public class AccountController {
 		var account = accountService.getAccount(accountId);
 		return new ResponseEntity<>(account, HttpStatus.OK);
 	}
+	
 
 	@DeleteMapping("/delete/{accountId}")
 	public ResponseEntity<ResponseMessage> deleteAccount(@PathVariable Long accountId) {

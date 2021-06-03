@@ -18,7 +18,6 @@ spring:
 
     
 #logging properties (SLF4J)
-
 #logging pattern for console
 logging:
   pattern:

@@ -19,7 +19,6 @@ import com.bankapplication.requests.AddBeneficiaryDetailsDTO;
 import com.bankapplication.responses.AccountDetailsResponseDTO;
 import com.bankapplication.responses.BeneficiaryDetailsResponseDTO;
 import com.bankapplication.services.interfaces.IAccountService;
-import com.bankapplication.utilities.AccountUtilities;
 
 @Service
 public class AccountServiceImpl implements IAccountService {
@@ -29,9 +28,6 @@ public class AccountServiceImpl implements IAccountService {
 
 	@Autowired
 	ModelMapper modelMapper;
-
-	@Autowired
-	AccountUtilities accountUtilities;
 
 	@Override
 	public Account getByAccount(@Valid Long accountId) {
@@ -46,8 +42,9 @@ public class AccountServiceImpl implements IAccountService {
 	@Override
 	public AccountDetailsResponseDTO saveAccount(@Valid AccountDetailsDTO accountDTO) {
 		var account = new Account();
-		AccountDetailsResponseDTO accountDetailsResponseDTO = null;
-		account = accountUtilities.copyPropertiesFromDTOToEntity(accountDTO, account);
+		var accountDetailsResponseDTO = new AccountDetailsResponseDTO();
+		BeanUtils.copyProperties(accountDTO, account);
+//		account = accountUtilities.copyPropertiesFromDTOToEntity(accountDTO, account);
 		if(account != null) {
 			if (account.getAccountNumber() == null) {
 				account.setAccountNumber(UUID.randomUUID().toString().substring(0, 9));
@@ -55,8 +52,8 @@ public class AccountServiceImpl implements IAccountService {
 			account = accountRepository.save(account);
 			
 		}
-		
-		accountDetailsResponseDTO = accountUtilities.copyPropertiesFromEntityToDTO(account);
+		BeanUtils.copyProperties(account, accountDetailsResponseDTO);
+//		accountDetailsResponseDTO = accountUtilities.copyPropertiesFromEntityToDTO(account);
 		return accountDetailsResponseDTO;
 
 	}
@@ -66,7 +63,9 @@ public class AccountServiceImpl implements IAccountService {
 		List<AccountDetailsResponseDTO> accountResponse = new ArrayList<>();
 		List<Account> accounts = accountRepository.findAll();
 		for (Account account : accounts) {
-			accountResponse.add(accountUtilities.copyPropertiesFromEntityToDTO(account));
+			AccountDetailsResponseDTO accountDetailsResponseDTO = new AccountDetailsResponseDTO();
+			BeanUtils.copyProperties(account, accountDetailsResponseDTO);
+			accountResponse.add(accountDetailsResponseDTO);
 		}
 		return accountResponse;
 	}
@@ -107,7 +106,7 @@ public class AccountServiceImpl implements IAccountService {
 		if(beneficiaryDetails != null && beneficiaryDetails.getAccountId() != null) {
 			 accountDB = getByAccount(beneficiaryDetails.getAccountId());
 		}
-		if(accountDB.getUser() != null) {
+		if(account.getUser() == null && accountDB != null ) {
 			account.setUser(accountDB.getUser());
 		}
 		if(beneficiaryDetails != null) {

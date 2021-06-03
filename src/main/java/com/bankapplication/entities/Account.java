@@ -1,5 +1,6 @@
 package com.bankapplication.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -33,7 +34,7 @@ public class Account {
 	@OneToMany(cascade = CascadeType.ALL ,orphanRemoval = true)
 	@JoinColumn(name = "beneficiaryAccount",referencedColumnName = "accountId")
 //	@JsonIgnore
-	private List<Beneficiery> beneficiaryAccounts;
+	private List<Beneficiery> beneficiaryAccounts = new ArrayList<Beneficiery>();
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "userId", referencedColumnName = "userId")

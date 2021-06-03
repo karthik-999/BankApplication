@@ -12,6 +12,10 @@ public class TransferAccountDetailsDTO {
 		this.amount = amount;
 	}
 
+	public TransferAccountDetailsDTO() {
+		super();
+	}
+	
 	public Integer getAmount() {
 		return amount;
 	}

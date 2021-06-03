@@ -1,5 +1,6 @@
 package com.bankapplication.requests;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.bankapplication.entities.Account;
@@ -14,7 +15,7 @@ public class AccountDetailsDTO {
 	
 	private Long balance;
 
-	private List<Beneficiery> beneficiaryAccounts;
+	private List<Beneficiery> beneficiaryAccounts = new ArrayList<>();
 
 	private Account parentAccount;
 
