@@ -19,10 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bankapplication.entities.Account;
 import com.bankapplication.entities.Beneficiery;
 import com.bankapplication.requests.AccountDetailsDTO;
+import com.bankapplication.requests.AddBeneficiaryDetailsDTO;
 import com.bankapplication.requests.TransferAccountDetailsDTO;
 import com.bankapplication.responses.AccountDetailsResponseDTO;
+import com.bankapplication.responses.BeneficiaryDetailsResponseDTO;
 import com.bankapplication.responses.ResponseMessage;
 import com.bankapplication.services.interfaces.IAccountService;
+
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @RestController
 @RequestMapping("/accounts")
@@ -31,54 +35,59 @@ public class AccountController {
 	@Autowired
 	IAccountService accountService;
 
-	@PostMapping("/add/account")
-	public ResponseEntity<AccountDetailsResponseDTO> addAccount(@RequestBody AccountDetailsDTO accountDetails) {
-		AccountDetailsResponseDTO accountDetailsResponseDTO = accountService.saveAccount(accountDetails);
-		return new ResponseEntity<>(accountDetailsResponseDTO, HttpStatus.CREATED);
-	}
+	/*
+	 * @PostMapping("/account/add") public ResponseEntity<AccountDetailsResponseDTO>
+	 * addAccount(@RequestBody AccountDetailsDTO accountDetails) {
+	 * AccountDetailsResponseDTO accountDetailsResponseDTO =
+	 * accountService.saveAccount(accountDetails); return new
+	 * ResponseEntity<>(accountDetailsResponseDTO, HttpStatus.CREATED); }
+	 * 
+	 * @PutMapping("/account/update") public
+	 * ResponseEntity<AccountDetailsResponseDTO> updateAccount(@RequestBody
+	 * AccountDetailsDTO accountDetails) { AccountDetailsResponseDTO
+	 * accountDetailsResponseDTO = accountService.saveAccount(accountDetails);
+	 * return new ResponseEntity<>(accountDetailsResponseDTO, HttpStatus.OK);
+	 * 
+	 * }
+	 */
 
-	@PutMapping("/update/account")
-	public ResponseEntity<AccountDetailsResponseDTO> updateAccount(@RequestBody AccountDetailsDTO accountDetails) {
-		AccountDetailsResponseDTO accountDetailsResponseDTO = accountService.saveAccount(accountDetails);
-		return new ResponseEntity<>(accountDetailsResponseDTO, HttpStatus.OK);
-
-	}
-
-	@GetMapping("/get/accounts")
+	@GetMapping("/all")
 	public ResponseEntity<List<AccountDetailsResponseDTO>> getAccounts() {
 		List<AccountDetailsResponseDTO> accounts = accountService.getAllAccounts();
 		return new ResponseEntity<>(accounts, HttpStatus.OK);
 	}
 
-	@GetMapping("/get/account/{accountId}")
-	public ResponseEntity<Account> getAccount(@PathVariable Long accountId) {
-		Account account = accountService.getAccount(accountId);
+	@GetMapping("/get/{accountId}")
+	public ResponseEntity<AccountDetailsResponseDTO> getAccount(@PathVariable Long accountId) {
+		AccountDetailsResponseDTO account = accountService.getAccount(accountId);
 		return new ResponseEntity<>(account, HttpStatus.OK);
 	}
 
-	@DeleteMapping("/delete/account/{accountId}")
+	@DeleteMapping("/delete/{accountId}")
 	public ResponseEntity<ResponseMessage> deleteAccount(@PathVariable Long accountId) {
 		accountService.deleteAccount(accountId);
 		return new ResponseEntity<>(new ResponseMessage("Successfully Deleted"), HttpStatus.OK);
 	}
 
-	// Add Beneficiary
-	// Update beneficiaries
-	// Delete Beneficiary
-	// Get Beneficiaries
+	// add beneficiary
+	@PutMapping("/beneficiary/add")
+	public ResponseEntity<BeneficiaryDetailsResponseDTO> updateAccount(@RequestBody AddBeneficiaryDetailsDTO accountDetails) {
+		BeneficiaryDetailsResponseDTO accountDetailsResponseDTO = accountService.updateAccount(accountDetails);
+		return new ResponseEntity<>(accountDetailsResponseDTO, HttpStatus.OK);
+	}
 
 	// transfer amount to beneficiary
-	@PostMapping("/amount/transfer")
+	@PostMapping("/fundTransfer")
 	public ResponseEntity<ResponseMessage> accountTransfer(
 			@Valid @RequestBody TransferAccountDetailsDTO requestDetails) {
 		synchronized (this) {
 
 			if (null != requestDetails) {
 				// if beneficiaryAccount is in list of beneficiaries then execute transfer..
-				Account userAccount = accountService.getByAccount(requestDetails.getUserAccountId());
-				Account beneficieryAccount = accountService.getByAccount(requestDetails.getBeneficiaryAccountId());
+				Account userAccount = accountService.getByAccount(requestDetails.getUserAccountNumber());
+				Account beneficieryAccount = accountService.getByAccount(requestDetails.getBeneficieryAccountNumber());
 				for (Beneficiery account : userAccount.getBeneficiaryAccounts()) {
-					if (account.getBeneficieryAccountNumber().equals(beneficieryAccount)) {
+					if (account.getBeneficieryNumber().equals(beneficieryAccount.getAccountNumber())) {
 						// initiate transfer..
 						Long beneficieryBalance = beneficieryAccount.getBalance() + requestDetails.getAmount();
 						beneficieryAccount.setBalance(beneficieryBalance);

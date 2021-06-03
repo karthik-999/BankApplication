@@ -1,16 +1,22 @@
 package com.bankapplication.entities;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long userId;
 
 	@Column
@@ -19,6 +25,13 @@ public class User {
 	@Column
 	private String username;
 
+
+	
+	@OneToMany(cascade = CascadeType.ALL ,orphanRemoval = true)
+	@JoinColumn(name = "userId",referencedColumnName = "userId")
+//	@JsonIgnore
+	private List<Account> userAccounts;
+
 	public User() {
 
 	}
@@ -26,6 +39,14 @@ public class User {
 	public User(String username, String password) {
 		this.username = username;
 		this.password = password;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 	public String getPassword() {
@@ -42,6 +63,14 @@ public class User {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public List<Account> getUserAccounts() {
+		return userAccounts;
+	}
+
+	public void setUserAccounts(List<Account> userAccounts) {
+		this.userAccounts = userAccounts;
 	}
 
 }

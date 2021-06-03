@@ -8,14 +8,18 @@ import java.util.UUID;
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bankapplication.entities.Account;
 import com.bankapplication.entities.Beneficiery;
 import com.bankapplication.repositories.AccountRepository;
+import com.bankapplication.repositories.UserRepository;
 import com.bankapplication.requests.AccountDetailsDTO;
+import com.bankapplication.requests.AddBeneficiaryDetailsDTO;
 import com.bankapplication.responses.AccountDetailsResponseDTO;
+import com.bankapplication.responses.BeneficiaryDetailsResponseDTO;
 import com.bankapplication.services.interfaces.IAccountService;
 import com.bankapplication.utilities.AccountUtilities;
 
@@ -50,14 +54,16 @@ public class AccountServiceImpl implements IAccountService {
 			if (account.getAccountNumber() == null) {
 				account.setAccountNumber(UUID.randomUUID().toString().substring(0, 9));
 			}
-			if (account.getBeneficiaryAccounts() != null) {
-				for (Beneficiery beneficiaryAccount : account.getBeneficiaryAccounts()) {
-					if(beneficiaryAccount.getBeneficieryAccountNumber() == null) {
-						beneficiaryAccount.setBeneficieryNumber(UUID.randomUUID().toString().substring(9, 19));
-					}
-				}
+//			if (account.getBeneficiaryAccounts() != null) {
+//				for (Beneficiery beneficiaryAccount : account.getBeneficiaryAccounts()) {
+//					if(beneficiaryAccount.getBeneficieryAccountNumber() == null) {
+//						beneficiaryAccount.setBeneficieryNumber(UUID.randomUUID().toString().substring(9, 19));
+//					}
+//				}
+//			}
+			if(account.getUser() == null) {
+				
 			}
-			
 			account = accountRepository.save(account);
 			
 		}
@@ -88,10 +94,12 @@ public class AccountServiceImpl implements IAccountService {
 	}
 
 	@Override
-	public Account getAccount(Long accountId) {
+	public AccountDetailsResponseDTO getAccount(Long accountId) {
+		AccountDetailsResponseDTO accountDetailsResponseDTO = new AccountDetailsResponseDTO();
 		Optional<Account> account = accountRepository.findByAccountId(accountId);
 		if (account.isPresent()) {
-			return account.get();
+			BeanUtils.copyProperties(account.get(),accountDetailsResponseDTO );
+			return accountDetailsResponseDTO;
 		}
 		return null;
 	}
@@ -99,5 +107,29 @@ public class AccountServiceImpl implements IAccountService {
 	@Override
 	public Account saveAccount(Account account) {
 		return accountRepository.save(account);
+	}
+
+	@Override
+	public BeneficiaryDetailsResponseDTO updateAccount(AddBeneficiaryDetailsDTO accountDetails) {
+		
+		Account account = new Account();
+		Account accountDB = new Account();
+
+		BeneficiaryDetailsResponseDTO beneficiaryDetailsResponseDTO = new BeneficiaryDetailsResponseDTO();
+		if(accountDetails != null && accountDetails.getAccountId() != null) {
+			 accountDB = getByAccount(accountDetails.getAccountId());
+		}
+		if(accountDB.getUser() != null) {
+			account.setUser(accountDB.getUser());
+		}
+		BeanUtils.copyProperties(accountDetails, account);
+		account = accountRepository.save(account);
+		BeanUtils.copyProperties(account, beneficiaryDetailsResponseDTO);
+		return beneficiaryDetailsResponseDTO;
+	}
+
+	@Override
+	public Account getByAccount(String beneficieryAccountNumber) {
+		return accountRepository.getByAccountNumber(beneficieryAccountNumber);
 	}
 }

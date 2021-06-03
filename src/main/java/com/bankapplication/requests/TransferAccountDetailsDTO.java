@@ -3,12 +3,12 @@ package com.bankapplication.requests;
 public class TransferAccountDetailsDTO {
 	
 	private Integer amount;
-	private Long beneficiaryAccountId;
-	private Long userAccountId;
+	private String beneficieryAccountNumber;
+	private String userAccountNumber;
 	
-	public TransferAccountDetailsDTO(Long userAccountId,Long beneficiaryAccountId,Integer amount) {
-		this.userAccountId = userAccountId;
-		this.beneficiaryAccountId = beneficiaryAccountId;
+	public TransferAccountDetailsDTO(String userAccountId,String beneficiaryAccountId,Integer amount) {
+		this.userAccountNumber = userAccountId;
+		this.beneficieryAccountNumber = beneficiaryAccountId;
 		this.amount = amount;
 	}
 
@@ -16,25 +16,27 @@ public class TransferAccountDetailsDTO {
 		return amount;
 	}
 
-	public Long getBeneficiaryAccountId() {
-		return beneficiaryAccountId;
-	}
-
-	public Long getUserAccountId() {
-		return userAccountId;
-	}
-
 	public void setAmount(Integer amount) {
 		this.amount = amount;
 	}
 
-	public void setBeneficiaryAccountId(Long beneficiaryAccountId) {
-		this.beneficiaryAccountId = beneficiaryAccountId;
+	public String getBeneficieryAccountNumber() {
+		return beneficieryAccountNumber;
 	}
 
-	public void setUserAccountId(Long userAccountId) {
-		this.userAccountId = userAccountId;
+	public void setBeneficieryAccountNumber(String beneficieryAccountNumber) {
+		this.beneficieryAccountNumber = beneficieryAccountNumber;
 	}
+
+	public String getUserAccountNumber() {
+		return userAccountNumber;
+	}
+
+	public void setUserAccountNumber(String userAccountNumber) {
+		this.userAccountNumber = userAccountNumber;
+	}
+
+
 	
 	
 }

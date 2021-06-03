@@ -22,7 +22,7 @@ public class Beneficiery {
 	private String beneficieryNumber;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "accountId")
+	@JoinColumn(name = "beneficiaryAccount")
 	private Account beneficieryAccountNumber;
 
 	public Long getBeneficieryId() {
