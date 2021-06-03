@@ -22,12 +22,12 @@ public class UserServiceImpl implements IUserService {
 	UserRepository userRepository;
 
 	public UserDetailsResponseDTO saveUser(UserDetailsDTO userDetails) {
-		User user = new User();
-		UserDetailsResponseDTO userDetailsResponseDTO = new UserDetailsResponseDTO();
+		var user = new User();
+		var userDetailsResponseDTO = new UserDetailsResponseDTO();
 		BeanUtils.copyProperties(userDetails, user);
 		if (userDetails != null && user.getUserAccounts() == null) {
 			List<Account> accounts = new ArrayList<>();
-			Account account = new Account();
+			var account = new Account();
 			account.setAccountNumber(UUID.randomUUID().toString().replace("-", "").substring(0, 9));
 			account.setBalance(0L);
 			accounts.add(account);
@@ -43,7 +43,7 @@ public class UserServiceImpl implements IUserService {
 		List<UserDetailsResponseDTO> userDetailsResponseDTOs = new ArrayList<>();
 		List<User> users = userRepository.findAll();
 		for (User user : users) {
-			UserDetailsResponseDTO userDetailsResponseDTO = new UserDetailsResponseDTO();
+			var userDetailsResponseDTO = new UserDetailsResponseDTO();
 			BeanUtils.copyProperties(user, userDetailsResponseDTO);
 			userDetailsResponseDTOs.add(userDetailsResponseDTO);
 		}

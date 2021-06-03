@@ -17,10 +17,13 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
+	ErrorMessage errorMessage = new ErrorMessage();
+	ErrorResponseDetails errorResponse = null;
+	
 	@ExceptionHandler(Exception.class)
 	public final ResponseEntity<ErrorMessage> genericExceptionHandler(Exception exception, WebRequest request) {
 		String errorMessageDescription = exception.getLocalizedMessage();
-		ErrorMessage errorMessage = new ErrorMessage(new Date(), errorMessageDescription);
+		errorMessage = new ErrorMessage(new Date(), errorMessageDescription);
 		return new ResponseEntity<>(errorMessage, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
@@ -31,7 +34,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		for (ObjectError error : ex.getBindingResult().getAllErrors()) {
 			details.add(error.getDefaultMessage());
 		}
-		ErrorResponseDetails error = new ErrorResponseDetails("Validation Failed", details);
-		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+		errorResponse = new ErrorResponseDetails("Validation Failed", details);
+		return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
 	}
 }

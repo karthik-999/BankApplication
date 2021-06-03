@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bankapplication.entities.Account;
 import com.bankapplication.entities.Beneficiery;
 import com.bankapplication.requests.AccountDetailsDTO;
 import com.bankapplication.requests.AddBeneficiaryDetailsDTO;
@@ -33,15 +32,16 @@ public class AccountController {
 	@Autowired
 	IAccountService accountService;
 
+	
 	@PostMapping("/account/add")
 	public ResponseEntity<AccountDetailsResponseDTO> addAccount(@RequestBody AccountDetailsDTO accountDetails) {
-		AccountDetailsResponseDTO accountDetailsResponseDTO = accountService.saveAccount(accountDetails);
+		var accountDetailsResponseDTO = accountService.saveAccount(accountDetails);
 		return new ResponseEntity<>(accountDetailsResponseDTO, HttpStatus.CREATED);
 	}
 
 	@PutMapping("/account/update")
 	public ResponseEntity<AccountDetailsResponseDTO> updateAccount(@RequestBody AccountDetailsDTO accountDetails) {
-		AccountDetailsResponseDTO accountDetailsResponseDTO = accountService.saveAccount(accountDetails);
+		var accountDetailsResponseDTO = accountService.saveAccount(accountDetails);
 		return new ResponseEntity<>(accountDetailsResponseDTO, HttpStatus.OK);
 
 	}
@@ -54,7 +54,7 @@ public class AccountController {
 
 	@GetMapping("/get/{accountId}")
 	public ResponseEntity<AccountDetailsResponseDTO> getAccount(@PathVariable Long accountId) {
-		AccountDetailsResponseDTO account = accountService.getAccount(accountId);
+		var account = accountService.getAccount(accountId);
 		return new ResponseEntity<>(account, HttpStatus.OK);
 	}
 
@@ -68,7 +68,7 @@ public class AccountController {
 	@PutMapping("/beneficiary/add")
 	public ResponseEntity<BeneficiaryDetailsResponseDTO> updateAccount(
 			@RequestBody AddBeneficiaryDetailsDTO accountDetails) {
-		BeneficiaryDetailsResponseDTO accountDetailsResponseDTO = accountService.updateAccount(accountDetails);
+		var accountDetailsResponseDTO = accountService.updateAccount(accountDetails);
 		return new ResponseEntity<>(accountDetailsResponseDTO, HttpStatus.OK);
 	}
 
@@ -80,8 +80,8 @@ public class AccountController {
 
 			if (null != requestDetails) {
 				// if beneficiaryAccount is in list of beneficiaries then execute transfer..
-				Account userAccount = accountService.getByAccount(requestDetails.getUserAccountNumber());
-				Account beneficieryAccount = accountService.getByAccount(requestDetails.getBeneficieryAccountNumber());
+				var userAccount = accountService.getByAccount(requestDetails.getUserAccountNumber());
+				var beneficieryAccount = accountService.getByAccount(requestDetails.getBeneficieryAccountNumber());
 				for (Beneficiery account : userAccount.getBeneficiaryAccounts()) {
 					if (account.getBeneficieryNumber().equals(beneficieryAccount.getAccountNumber())) {
 						// initiate transfer..

@@ -17,14 +17,14 @@ public class AccountUtilities {
 
 	
 	public AccountDetailsResponseDTO copyPropertiesFromEntityToDTO(Account account) {
-		AccountDetailsResponseDTO accountDetailsResponseDTO = new AccountDetailsResponseDTO();
+		var accountDetailsResponseDTO = new AccountDetailsResponseDTO();
 		accountDetailsResponseDTO.setAccountId(account.getAccountId());
 		accountDetailsResponseDTO.setAccountNumber(account.getAccountNumber());
 		accountDetailsResponseDTO.setBalance(account.getBalance());
 		accountDetailsResponseDTO.setUser(account.getUser());
 		List<Beneficiery> beneficieryAccounts = new ArrayList<>();
 		for(Beneficiery beneficieryAccount: account.getBeneficiaryAccounts()) {
-			Beneficiery beneficieryAccountResponse = new Beneficiery();
+			var beneficieryAccountResponse = new Beneficiery();
 			beneficieryAccountResponse.setBeneficieryAccountNumber(beneficieryAccount.getBeneficieryAccountNumber());
 			beneficieryAccountResponse.setBeneficieryId(beneficieryAccount.getBeneficieryId());
 			beneficieryAccountResponse.setBeneficieryNumber(beneficieryAccount.getBeneficieryNumber());
@@ -41,7 +41,7 @@ public class AccountUtilities {
 		account.setUser(accountDetailsResponseDTO1.getUser());
 		List<Beneficiery> beneficieryAccounts = new ArrayList<>();
 		for(Beneficiery beneficieryAccount: accountDetailsResponseDTO1.getBeneficiaryAccounts()) {
-			Beneficiery beneficieryAccountResponse = new Beneficiery();
+			var beneficieryAccountResponse = new Beneficiery();
 			beneficieryAccountResponse.setBeneficieryAccountNumber(beneficieryAccount.getBeneficieryAccountNumber());
 			beneficieryAccountResponse.setBeneficieryId(beneficieryAccount.getBeneficieryId());
 			beneficieryAccountResponse.setBeneficieryNumber(beneficieryAccount.getBeneficieryNumber());
@@ -59,7 +59,7 @@ public class AccountUtilities {
 		List<Beneficiery> beneficieryAccounts = new ArrayList<>();
 		if(accountDetailsDTO.getBeneficiaryAccounts() != null) {
 			for(Beneficiery beneficieryAccount: accountDetailsDTO.getBeneficiaryAccounts()) {
-				Beneficiery beneficieryAccountResponse = new Beneficiery();
+				var beneficieryAccountResponse = new Beneficiery();
 				beneficieryAccountResponse.setBeneficieryAccountNumber(beneficieryAccount.getBeneficieryAccountNumber());
 				beneficieryAccountResponse.setBeneficieryId(beneficieryAccount.getBeneficieryId());
 				beneficieryAccountResponse.setBeneficieryNumber(beneficieryAccount.getBeneficieryNumber());

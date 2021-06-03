@@ -45,7 +45,7 @@ public class AccountServiceImpl implements IAccountService {
 
 	@Override
 	public AccountDetailsResponseDTO saveAccount(@Valid AccountDetailsDTO accountDTO) {
-		Account account = new Account();
+		var account = new Account();
 		AccountDetailsResponseDTO accountDetailsResponseDTO = null;
 		account = accountUtilities.copyPropertiesFromDTOToEntity(accountDTO, account);
 		if(account != null) {
@@ -75,7 +75,7 @@ public class AccountServiceImpl implements IAccountService {
 	public void deleteAccount(Long accountId) {
 		Optional<Account> accountWrapper = accountRepository.findByAccountId(accountId);
 		if (accountWrapper.isPresent()) {
-			Account account = accountWrapper.get();
+			var account = accountWrapper.get();
 			accountRepository.delete(account);
 		}
 
@@ -83,7 +83,7 @@ public class AccountServiceImpl implements IAccountService {
 
 	@Override
 	public AccountDetailsResponseDTO getAccount(Long accountId) {
-		AccountDetailsResponseDTO accountDetailsResponseDTO = new AccountDetailsResponseDTO();
+		var accountDetailsResponseDTO = new AccountDetailsResponseDTO();
 		Optional<Account> account = accountRepository.findByAccountId(accountId);
 		if (account.isPresent()) {
 			BeanUtils.copyProperties(account.get(),accountDetailsResponseDTO );
@@ -100,10 +100,10 @@ public class AccountServiceImpl implements IAccountService {
 	@Override
 	public BeneficiaryDetailsResponseDTO updateAccount(AddBeneficiaryDetailsDTO beneficiaryDetails) {
 		
-		Account account = new Account();
-		Account accountDB = new Account();
+		var account = new Account();
+		var accountDB = new Account();
 
-		BeneficiaryDetailsResponseDTO beneficiaryDetailsResponseDTO = new BeneficiaryDetailsResponseDTO();
+		var beneficiaryDetailsResponseDTO = new BeneficiaryDetailsResponseDTO();
 		if(beneficiaryDetails != null && beneficiaryDetails.getAccountId() != null) {
 			 accountDB = getByAccount(beneficiaryDetails.getAccountId());
 		}
