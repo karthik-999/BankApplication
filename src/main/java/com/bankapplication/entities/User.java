@@ -24,6 +24,11 @@ public class User {
 	@Column
 	private String username;
 
+	@Column(name="Email_ID")
+	private String email;
+	
+	@Column(name="PhoneNumber")
+	private String phoneNumber;
 
 	
 	@OneToMany(cascade = CascadeType.ALL ,orphanRemoval = true)
@@ -70,6 +75,22 @@ public class User {
 
 	public void setUserAccounts(List<Account> userAccounts) {
 		this.userAccounts = userAccounts;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 }

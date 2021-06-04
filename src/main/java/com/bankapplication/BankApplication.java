@@ -16,7 +16,7 @@ public class BankApplication {
 	}
 
 	
-	 @Bean
+	 	@Bean
 	    public ModelMapper modelMapper(){
 	        return new ModelMapper();
 	    }

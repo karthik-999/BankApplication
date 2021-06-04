@@ -15,6 +15,9 @@ public class UserDetailsResponseDTO {
 
 	private List<Account> userAccounts = new ArrayList<>();
 
+	private String email;
+	
+	private String phoneNumber;
 
 	public UserDetailsResponseDTO() {
 		super();
@@ -51,6 +54,22 @@ public class UserDetailsResponseDTO {
 
 	public void setUserAccounts(List<Account> userAccounts) {
 		this.userAccounts = userAccounts;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	

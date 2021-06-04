@@ -1,5 +1,6 @@
 package com.bankapplication.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @JsonIgnoreProperties(value = { "user", "beneficiaryAccounts", "handler",
 		"hibernateLazyInitializer" }, allowSetters = true)
-public class Account {
+public class Account implements Serializable {
 
 	@Column
 	@Id
@@ -31,10 +32,10 @@ public class Account {
 	@Column
 	private Long balance;
 
-	@OneToMany(cascade = CascadeType.ALL ,orphanRemoval = true)
-	@JoinColumn(name = "beneficiaryAccount",referencedColumnName = "accountId")
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "userAccount", referencedColumnName = "accountId")
 //	@JsonIgnore
-	private List<Beneficiery> beneficiaryAccounts = new ArrayList<Beneficiery>();
+	private List<Beneficiery> beneficiaryAccounts = new ArrayList<>();
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "userId", referencedColumnName = "userId")
@@ -57,9 +58,6 @@ public class Account {
 		return beneficiaryAccounts;
 	}
 
-	
-	
-	
 	public User getUser() {
 		return user;
 	}

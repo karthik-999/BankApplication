@@ -44,16 +44,11 @@ public class AccountServiceImpl implements IAccountService {
 		var account = new Account();
 		var accountDetailsResponseDTO = new AccountDetailsResponseDTO();
 		BeanUtils.copyProperties(accountDTO, account);
-//		account = accountUtilities.copyPropertiesFromDTOToEntity(accountDTO, account);
-		if(account != null) {
 			if (account.getAccountNumber() == null) {
-				account.setAccountNumber(UUID.randomUUID().toString().substring(0, 9));
-			}
+				account.setAccountNumber(UUID.randomUUID().toString().substring(0, 9).toUpperCase());
 			account = accountRepository.save(account);
-			
 		}
 		BeanUtils.copyProperties(account, accountDetailsResponseDTO);
-//		accountDetailsResponseDTO = accountUtilities.copyPropertiesFromEntityToDTO(account);
 		return accountDetailsResponseDTO;
 
 	}
@@ -63,7 +58,7 @@ public class AccountServiceImpl implements IAccountService {
 		List<AccountDetailsResponseDTO> accountResponse = new ArrayList<>();
 		List<Account> accounts = accountRepository.findAll();
 		for (Account account : accounts) {
-			AccountDetailsResponseDTO accountDetailsResponseDTO = new AccountDetailsResponseDTO();
+			var accountDetailsResponseDTO = new AccountDetailsResponseDTO();
 			BeanUtils.copyProperties(account, accountDetailsResponseDTO);
 			accountResponse.add(accountDetailsResponseDTO);
 		}

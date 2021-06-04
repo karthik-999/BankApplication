@@ -14,7 +14,7 @@ public class AccountDetailsResponseDTO {
 
 	private Long balance;
 
-	private List<Beneficiery> beneficiaryAccounts = new ArrayList<Beneficiery>();
+	private List<Beneficiery> beneficiaryAccounts = new ArrayList<>();
 
 	private User user;
 

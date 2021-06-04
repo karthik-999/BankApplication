@@ -1,14 +1,10 @@
 package com.bankapplication.entities;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Beneficiery {
@@ -18,12 +14,12 @@ public class Beneficiery {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long beneficieryId;
 
-	@Column
+	@Column(name="beneficieryNumber")
 	private String beneficieryNumber;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "beneficiaryAccount")
-	private Account beneficieryAccountNumber;
+//	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	@JoinColumn(name = "beneficiaryAccount")
+//	private Account beneficieryAccountNumber;
 
 	public Long getBeneficieryId() {
 		return beneficieryId;
@@ -41,12 +37,12 @@ public class Beneficiery {
 		this.beneficieryNumber = beneficieryNumber;
 	}
 
-	public Account getBeneficieryAccountNumber() {
-		return beneficieryAccountNumber;
-	}
-
-	public void setBeneficieryAccountNumber(Account beneficieryAccountNumber) {
-		this.beneficieryAccountNumber = beneficieryAccountNumber;
-	}
+//	public Account getBeneficieryAccountNumber() {
+//		return beneficieryAccountNumber;
+//	}
+//
+//	public void setBeneficieryAccountNumber(Account beneficieryAccountNumber) {
+//		this.beneficieryAccountNumber = beneficieryAccountNumber;
+//	}
 
 }
