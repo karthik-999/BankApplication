@@ -16,13 +16,13 @@ import com.bankapplication.responses.UserDetailsResponseDTO;
 import com.bankapplication.services.interfaces.IUserService;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
 
 	@Autowired
 	IUserService userService;
 	
-	@PostMapping("/user/add")
+	@PostMapping("/add")
 	public ResponseEntity<UserDetailsResponseDTO> addUser(@RequestBody UserDetailsDTO userDetails) {
 		var userDetailsResponseDTO = userService.saveUser(userDetails);
 		return new ResponseEntity<>(userDetailsResponseDTO, HttpStatus.CREATED);

@@ -30,7 +30,7 @@ import com.bankapplication.services.interfaces.IAccountService;
 import com.bankapplication.services.interfaces.ITransactionService;
 
 @RestController
-@RequestMapping("/accounts")
+@RequestMapping("/account")
 public class AccountController {
 
 	@Autowired
