@@ -1,6 +1,7 @@
 package com.bankapplication.entities;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -32,6 +33,9 @@ public class Transaction implements Serializable{
 
 	@Column(name = "TransferredAmount")
 	private Double amount;
+
+	@Column(name="TimeStamp")
+	private LocalDateTime timestamp;
 
 	public Transaction() {
 		super();
@@ -75,6 +79,14 @@ public class Transaction implements Serializable{
 
 	public void setTransactionNumber(String transactionNumber) {
 		this.transactionNumber = transactionNumber;
+	}
+
+	public LocalDateTime getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(LocalDateTime timestamp) {
+		this.timestamp = timestamp;
 	}
 
 }

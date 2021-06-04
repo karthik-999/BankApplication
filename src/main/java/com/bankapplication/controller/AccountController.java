@@ -1,5 +1,6 @@
 package com.bankapplication.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -105,6 +106,7 @@ public class AccountController {
 						transaction.setReceiverID(beneficieryAccount);
 						transaction.setTransactionNumber(UUID.randomUUID().toString().replace("-", "").substring(12,21));
 						transaction.setAmount(requestDetails.getAmount().doubleValue());
+						transaction.setTimestamp(LocalDateTime.now());
 						transactionService.saveTransaction(transaction);
 						
 						return new ResponseEntity<>(
