@@ -1,12 +1,13 @@
 package com.bankapplication.controller;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,9 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bankapplication.entities.Account;
-import com.bankapplication.entities.Beneficiery;
-import com.bankapplication.entities.Transaction;
 import com.bankapplication.requests.AddBeneficiaryDetailsDTO;
 import com.bankapplication.requests.TransferAccountDetailsDTO;
 import com.bankapplication.responses.AccountDetailsResponseDTO;
@@ -38,9 +36,10 @@ public class AccountController {
 	@Autowired
 	public ITransactionService transactionService;
 
-	@GetMapping("/all")
-	public ResponseEntity<List<AccountDetailsResponseDTO>> getAccounts() {
-		List<AccountDetailsResponseDTO> accounts = accountService.getAllAccounts();
+	@GetMapping("/all/{page}/{size}")
+	public ResponseEntity<List<AccountDetailsResponseDTO>> getAccounts(@PathVariable int page, @PathVariable int size) {
+		Pageable pageable = PageRequest.of(page, size,Sort.by("accountId").ascending());
+		List<AccountDetailsResponseDTO> accounts = accountService.getAllAccounts(pageable);
 		return new ResponseEntity<>(accounts, HttpStatus.OK);
 	}
 

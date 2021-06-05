@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.data.domain.Pageable;
+
 import com.bankapplication.entities.Account;
 import com.bankapplication.requests.AccountDetailsDTO;
 import com.bankapplication.requests.AddBeneficiaryDetailsDTO;
@@ -17,7 +19,7 @@ public interface IAccountService {
 
 	AccountDetailsResponseDTO saveAccount(AccountDetailsDTO accountDTO);
 
-	List<AccountDetailsResponseDTO> getAllAccounts();
+	List<AccountDetailsResponseDTO> getAllAccounts(Pageable pageable);
 
 	void deleteAccount(Long accountId);
 

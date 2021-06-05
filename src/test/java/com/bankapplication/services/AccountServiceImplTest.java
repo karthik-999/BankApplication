@@ -14,6 +14,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import com.bankapplication.entities.Account;
 import com.bankapplication.entities.Beneficiery;
@@ -152,8 +155,11 @@ class AccountServiceImplTest {
 
 		accounts.add(account);
 		when(accountRepository.findAll()).thenReturn(accounts);
+		int page =0;
+		int size =2;
+		Pageable pageable = PageRequest.of(page, size,Sort.by("accountId").ascending());
 
-		List<AccountDetailsResponseDTO> mockedAccounts = accountService.getAllAccounts();
+		List<AccountDetailsResponseDTO> mockedAccounts = accountService.getAllAccounts(pageable);
 		assertNotNull(mockedAccounts);
 
 	}

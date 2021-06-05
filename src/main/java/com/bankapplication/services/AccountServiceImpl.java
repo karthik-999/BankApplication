@@ -10,6 +10,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.bankapplication.entities.Account;
@@ -58,10 +60,10 @@ public class AccountServiceImpl implements IAccountService {
 	}
 
 	@Override
-	public List<AccountDetailsResponseDTO> getAllAccounts() {
+	public List<AccountDetailsResponseDTO> getAllAccounts(Pageable pageable) {
 		List<AccountDetailsResponseDTO> accountResponse = new ArrayList<>();
-		List<Account> accounts = accountRepository.findAll();
-		for (Account account : accounts) {
+		Page<Account> accountsPage = accountRepository.findAll(pageable);
+		for (Account account : accountsPage.getContent()) {
 			var accountDetailsResponseDTO = new AccountDetailsResponseDTO();
 			BeanUtils.copyProperties(account, accountDetailsResponseDTO);
 			accountResponse.add(accountDetailsResponseDTO);
