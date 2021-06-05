@@ -14,12 +14,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @JsonIgnoreProperties(value = { "user", "beneficiaryAccounts", "handler",
 		"hibernateLazyInitializer" }, allowSetters = true)
 public class Account implements Serializable {
+
+	private static final long serialVersionUID = -9197902894043148898L;
 
 	@Column
 	@Id
@@ -39,8 +42,13 @@ public class Account implements Serializable {
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "userId", referencedColumnName = "userId")
-//	@JsonIgnore
+	@JsonIgnore
 	private User user;
+	
+//	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+//	@JoinColumn(name = "senderAccount", referencedColumnName = "accountId")
+////	@JsonIgnore
+//	private List<Transaction> trasactions = new ArrayList<>();
 
 	public Long getAccountId() {
 		return accountId;

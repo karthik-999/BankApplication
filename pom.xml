@@ -49,11 +49,11 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.github.jmnarloch</groupId>
 			<artifactId>modelmapper-spring-boot-starter</artifactId>
 			<version>1.0.1</version>
-		</dependency>
+		</dependency> -->
 
 		<!-- swagger configuration -->
 		<dependency>

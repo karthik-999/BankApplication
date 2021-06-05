@@ -40,19 +40,6 @@ public class AccountController {
 	ITransactionService transactionService;
 
 	
-	@PostMapping("/add")
-	public ResponseEntity<AccountDetailsResponseDTO> addAccount(@RequestBody AccountDetailsDTO accountDetails) {
-		var accountDetailsResponseDTO = accountService.saveAccount(accountDetails);
-		return new ResponseEntity<>(accountDetailsResponseDTO, HttpStatus.CREATED);
-	}
-
-	@PutMapping("/update")
-	public ResponseEntity<AccountDetailsResponseDTO> updateAccount(@RequestBody AccountDetailsDTO accountDetails) {
-		var accountDetailsResponseDTO = accountService.saveAccount(accountDetails);
-		return new ResponseEntity<>(accountDetailsResponseDTO, HttpStatus.OK);
-
-	}
-
 	@GetMapping("/all")
 	public ResponseEntity<List<AccountDetailsResponseDTO>> getAccounts() {
 		List<AccountDetailsResponseDTO> accounts = accountService.getAllAccounts();
@@ -102,11 +89,11 @@ public class AccountController {
 						accountService.saveAccount(userAccount);
 						
 						var transaction = new Transaction();
-						transaction.setSenderID(userAccount);
-						transaction.setReceiverID(beneficieryAccount);
+						transaction.setSenderAccount(userAccount);
+						transaction.setReceiverAccount(beneficieryAccount);
 						transaction.setTransactionNumber(UUID.randomUUID().toString().replace("-", "").substring(12,21));
 						transaction.setAmount(requestDetails.getAmount().doubleValue());
-						transaction.setTimestamp(LocalDateTime.now());
+						transaction.setCreatedTime(LocalDateTime.now());
 						transactionService.saveTransaction(transaction);
 						
 						return new ResponseEntity<>(

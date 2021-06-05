@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.bankapplication.entities.Transaction;
@@ -26,10 +28,10 @@ public class TransactionServiceImpl implements ITransactionService {
 	}
 
 	@Override
-	public List<TransactionDetailsResponseDTO> getAllTransactions() {
+	public List<TransactionDetailsResponseDTO> getAllTransactions(Pageable pageable) {
 		var transactionDetailsResponseDTOs = new ArrayList<TransactionDetailsResponseDTO>();
 		var transactionDetailsResponseDTO = new TransactionDetailsResponseDTO();
-		List<Transaction>transactions = transactionRepository.findAll();
+		Page<Transaction>transactions = transactionRepository.findAll(pageable);
 		for (Transaction transaction : transactions) {
 			BeanUtils.copyProperties(transaction, transactionDetailsResponseDTO);
 			transactionDetailsResponseDTOs.add(transactionDetailsResponseDTO);

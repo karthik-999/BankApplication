@@ -1,18 +1,22 @@
 package com.bankapplication.responses;
 
+import java.time.LocalDateTime;
+
 import com.bankapplication.entities.Account;
 
 public class TransactionDetailsResponseDTO {
 
 	private Long transactionID;
 
-	private Account senderID;
-
-	private Account receiverID;
-
 	private String transactionNumber;
 
 	private Double amount;
+	
+	private Account senderAccount;
+
+	private Account receiverAccount;
+
+	private LocalDateTime createdTime;
 
 	public TransactionDetailsResponseDTO() {
 		super();
@@ -26,21 +30,6 @@ public class TransactionDetailsResponseDTO {
 		this.transactionID = transactionID;
 	}
 
-	public Account getSenderID() {
-		return senderID;
-	}
-
-	public void setSenderID(Account senderID) {
-		this.senderID = senderID;
-	}
-
-	public Account getReceiverID() {
-		return receiverID;
-	}
-
-	public void setReceiverID(Account receiverID) {
-		this.receiverID = receiverID;
-	}
 
 	public String getTransactionNumber() {
 		return transactionNumber;
@@ -56,6 +45,30 @@ public class TransactionDetailsResponseDTO {
 
 	public void setAmount(Double amount) {
 		this.amount = amount;
+	}
+
+	public Account getSenderAccount() {
+		return senderAccount;
+	}
+
+	public void setSenderAccount(Account senderAccount) {
+		this.senderAccount = senderAccount;
+	}
+
+	public Account getReceiverAccount() {
+		return receiverAccount;
+	}
+
+	public void setReceiverAccount(Account receiverAccount) {
+		this.receiverAccount = receiverAccount;
+	}
+
+	public LocalDateTime getCreatedTime() {
+		return createdTime;
+	}
+
+	public void setCreatedTime(LocalDateTime createdTime) {
+		this.createdTime = createdTime;
 	}
 
 }

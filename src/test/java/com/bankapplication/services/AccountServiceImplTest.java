@@ -50,7 +50,7 @@ class AccountServiceImplTest {
 		List<Beneficiery> beneficieryAccounts = new ArrayList<>();
 		Beneficiery beneficieryaccount = new Beneficiery();
 		beneficieryaccount.setBeneficieryId(3L);
-		beneficieryaccount.setBeneficieryAccountNumber(account);
+//		beneficieryaccount.setBeneficieryAccountNumber(account);
 		beneficieryaccount.setBeneficieryNumber("1Z1GZAG3");
 		beneficieryAccounts.add(beneficieryaccount);
 		account.setBeneficiaryAccounts(beneficieryAccounts);
@@ -71,7 +71,7 @@ class AccountServiceImplTest {
 		List<Beneficiery> beneficieryAccounts = new ArrayList<>();
 		Beneficiery beneficieryaccount = new Beneficiery();
 		beneficieryaccount.setBeneficieryId(3L);
-		beneficieryaccount.setBeneficieryAccountNumber(account);
+//		beneficieryaccount.setBeneficieryAccountNumber(account);
 		beneficieryaccount.setBeneficieryNumber("1Z1GZAG3");
 		beneficieryAccounts.add(beneficieryaccount);
 		account.setBeneficiaryAccounts(beneficieryAccounts);
@@ -92,7 +92,7 @@ class AccountServiceImplTest {
 		List<Beneficiery> beneficieryAccounts = new ArrayList<>();
 		Beneficiery beneficieryaccount = new Beneficiery();
 		beneficieryaccount.setBeneficieryId(3L);
-		beneficieryaccount.setBeneficieryAccountNumber(account);
+//		beneficieryaccount.setBeneficieryAccountNumber(account);
 		beneficieryaccount.setBeneficieryNumber("1Z1GZAG3");
 		beneficieryAccounts.add(beneficieryaccount);
 		account.setBeneficiaryAccounts(beneficieryAccounts);
@@ -102,7 +102,7 @@ class AccountServiceImplTest {
 		user.setUserId(1L);
 		user.setPassword("admin");
 		user.setUsername("admin");
-		List<Account> accounts = new ArrayList();
+		List<Account> accounts = new ArrayList<>();
 		user.setUserAccounts(accounts);
 		account.setUser(user);
 
@@ -115,7 +115,7 @@ class AccountServiceImplTest {
 		List<Beneficiery> beneficieryAccounts1 = new ArrayList<>();
 		Beneficiery beneficieryaccount1 = new Beneficiery();
 		beneficieryaccount1.setBeneficieryId(3L);
-		beneficieryaccount1.setBeneficieryAccountNumber(account);
+//		beneficieryaccount1.setBeneficieryAccountNumber(account);
 		beneficieryaccount1.setBeneficieryNumber("1Z1GZAG3");
 		beneficieryAccounts1.add(beneficieryaccount1);
 		accountDetailsDTO.setBeneficiaryAccounts(beneficieryAccounts1);
@@ -124,7 +124,7 @@ class AccountServiceImplTest {
 		accountDetailsDTO.setUser(user);
 
 		AccountDetailsResponseDTO mockedAccount = accountService.saveAccount(accountDetailsDTO);
-//	assertNotNull(mockedAccount);
+		assertNotNull(mockedAccount);
 //	assertEquals("1AID1ZG", mockedAccount.getAccountNumber());	
 	}
 
@@ -138,7 +138,7 @@ class AccountServiceImplTest {
 		List<Beneficiery> beneficieryAccounts = new ArrayList<>();
 		Beneficiery beneficieryaccount = new Beneficiery();
 		beneficieryaccount.setBeneficieryId(3L);
-		beneficieryaccount.setBeneficieryAccountNumber(account);
+//		beneficieryaccount.setBeneficieryAccountNumber(account);
 		beneficieryaccount.setBeneficieryNumber("1Z1GZAG3");
 		beneficieryAccounts.add(beneficieryaccount);
 		account.setBeneficiaryAccounts(beneficieryAccounts);
@@ -146,7 +146,7 @@ class AccountServiceImplTest {
 		user.setUserId(1L);
 		user.setPassword("admin");
 		user.setUsername("admin");
-		List<Account> accounts = new ArrayList();
+		List<Account> accounts = new ArrayList<>();
 		user.setUserAccounts(accounts);
 		account.setUser(user);
 
@@ -167,7 +167,7 @@ class AccountServiceImplTest {
 		List<Beneficiery> beneficieryAccounts = new ArrayList<>();
 		Beneficiery beneficieryaccount = new Beneficiery();
 		beneficieryaccount.setBeneficieryId(3L);
-		beneficieryaccount.setBeneficieryAccountNumber(account);
+//		beneficieryaccount.setBeneficieryAccountNumber(account);
 		beneficieryaccount.setBeneficieryNumber("1Z1GZAG3");
 		beneficieryAccounts.add(beneficieryaccount);
 		account.setBeneficiaryAccounts(beneficieryAccounts);
@@ -175,7 +175,7 @@ class AccountServiceImplTest {
 		user.setUserId(1L);
 		user.setPassword("admin");
 		user.setUsername("admin");
-		List<Account> accounts = new ArrayList();
+		List<Account> accounts = new ArrayList<>();
 		user.setUserAccounts(accounts);
 		account.setUser(user);
 		accounts.add(account);
@@ -196,7 +196,7 @@ class AccountServiceImplTest {
 		List<Beneficiery> beneficieryAccounts = new ArrayList<>();
 		Beneficiery beneficieryaccount = new Beneficiery();
 		beneficieryaccount.setBeneficieryId(3L);
-		beneficieryaccount.setBeneficieryAccountNumber(account);
+//		beneficieryaccount.setBeneficieryAccountNumber(account);
 		beneficieryaccount.setBeneficieryNumber("1Z1GZAG3");
 		beneficieryAccounts.add(beneficieryaccount);
 		account.setBeneficiaryAccounts(beneficieryAccounts);
@@ -206,7 +206,7 @@ class AccountServiceImplTest {
 		user.setUserId(1L);
 		user.setPassword("admin");
 		user.setUsername("admin");
-		List<Account> accounts = new ArrayList();
+		List<Account> accounts = new ArrayList<>();
 		user.setUserAccounts(accounts);
 		account.setUser(user);
 		when(accountService1.getByAccount(Mockito.any(Long.class))).thenReturn(account);
@@ -219,14 +219,14 @@ class AccountServiceImplTest {
 		List<Beneficiery> beneficieryAccounts1 = new ArrayList<>();
 		Beneficiery beneficieryaccount1 = new Beneficiery();
 		beneficieryaccount1.setBeneficieryId(3L);
-		beneficieryaccount1.setBeneficieryAccountNumber(account);
+//		beneficieryaccount1.setBeneficieryAccountNumber(account);
 		beneficieryaccount1.setBeneficieryNumber("1Z1GZAG3");
 		beneficieryAccounts1.add(beneficieryaccount1);
 		accountDetailsDTO.setBeneficiaryAccounts(beneficieryAccounts1);
 		accountDetailsDTO.setBalance(999L);
 
-		BeneficiaryDetailsResponseDTO mockedAccount = accountService.updateAccount(accountDetailsDTO);	
-	
+		BeneficiaryDetailsResponseDTO mockedAccount = accountService.updateAccount(accountDetailsDTO);
+		assertNotNull(mockedAccount);
 	}
 	/*
 	 * @Test void testSaveAccountAccount() { fail("Not yet implemented"); }
@@ -235,7 +235,5 @@ class AccountServiceImplTest {
 	 * 
 	 * @Test void testGetByAccountString() { fail("Not yet implemented"); }
 	 */
-
-	
 
 }

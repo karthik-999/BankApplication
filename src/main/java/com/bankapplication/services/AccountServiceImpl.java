@@ -7,7 +7,6 @@ import java.util.UUID;
 
 import javax.validation.Valid;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,9 +24,6 @@ public class AccountServiceImpl implements IAccountService {
 
 	@Autowired
 	AccountRepository accountRepository;
-
-	@Autowired
-	ModelMapper modelMapper;
 
 	@Override
 	public Account getByAccount(@Valid Long accountId) {

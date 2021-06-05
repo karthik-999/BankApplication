@@ -15,18 +15,20 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Transaction implements Serializable{
 
+	private static final long serialVersionUID = 7570294900213236886L;
+
 	@Id
 	@Column
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long transactionID;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FromAccount", referencedColumnName = "userId")
-	private Account senderID;
+	@JoinColumn(name = "FromAccount", referencedColumnName = "accountId")
+	private Account senderAccount;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "ToAccount", referencedColumnName = "userId")
-	private Account receiverID;
+	@JoinColumn(name = "ToAccount", referencedColumnName = "accountId")
+	private Account receiverAccount;
 
 	@Column(name = "Transaction_ID")
 	private String transactionNumber;
@@ -34,8 +36,8 @@ public class Transaction implements Serializable{
 	@Column(name = "TransferredAmount")
 	private Double amount;
 
-	@Column(name="TimeStamp")
-	private LocalDateTime timestamp;
+	@Column(name="createdTime")
+	private LocalDateTime createdTime;
 
 	public Transaction() {
 		super();
@@ -47,22 +49,6 @@ public class Transaction implements Serializable{
 
 	public void setAmount(Double amount) {
 		this.amount = amount;
-	}
-
-	public Account getSenderID() {
-		return senderID;
-	}
-
-	public void setSenderID(Account senderID) {
-		this.senderID = senderID;
-	}
-
-	public Account getReceiverID() {
-		return receiverID;
-	}
-
-	public void setReceiverID(Account receiverID) {
-		this.receiverID = receiverID;
 	}
 
 	public Long getTransactionID() {
@@ -81,12 +67,28 @@ public class Transaction implements Serializable{
 		this.transactionNumber = transactionNumber;
 	}
 
-	public LocalDateTime getTimestamp() {
-		return timestamp;
+	public Account getReceiverAccount() {
+		return receiverAccount;
 	}
 
-	public void setTimestamp(LocalDateTime timestamp) {
-		this.timestamp = timestamp;
+	public void setReceiverAccount(Account receiverAccount) {
+		this.receiverAccount = receiverAccount;
+	}
+
+	public Account getSenderAccount() {
+		return senderAccount;
+	}
+
+	public void setSenderAccount(Account senderAccount) {
+		this.senderAccount = senderAccount;
+	}
+
+	public LocalDateTime getCreatedTime() {
+		return createdTime;
+	}
+
+	public void setCreatedTime(LocalDateTime createdTime) {
+		this.createdTime = createdTime;
 	}
 
 }
