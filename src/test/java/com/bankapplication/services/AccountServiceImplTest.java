@@ -167,7 +167,6 @@ class AccountServiceImplTest {
 		List<Beneficiery> beneficieryAccounts = new ArrayList<>();
 		Beneficiery beneficieryaccount = new Beneficiery();
 		beneficieryaccount.setBeneficieryId(3L);
-//		beneficieryaccount.setBeneficieryAccountNumber(account);
 		beneficieryaccount.setBeneficieryNumber("1Z1GZAG3");
 		beneficieryAccounts.add(beneficieryaccount);
 		account.setBeneficiaryAccounts(beneficieryAccounts);

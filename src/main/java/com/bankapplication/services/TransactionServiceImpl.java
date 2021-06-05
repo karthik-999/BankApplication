@@ -31,7 +31,8 @@ public class TransactionServiceImpl implements ITransactionService {
 	public List<TransactionDetailsResponseDTO> getAllTransactions(Pageable pageable) {
 		var transactionDetailsResponseDTOs = new ArrayList<TransactionDetailsResponseDTO>();
 		var transactionDetailsResponseDTO = new TransactionDetailsResponseDTO();
-		Page<Transaction>transactions = transactionRepository.findAll(pageable);
+		Page<Transaction>transactionPages = transactionRepository.findAll(pageable);
+		var transactions = transactionPages.getContent();
 		for (Transaction transaction : transactions) {
 			BeanUtils.copyProperties(transaction, transactionDetailsResponseDTO);
 			transactionDetailsResponseDTOs.add(transactionDetailsResponseDTO);

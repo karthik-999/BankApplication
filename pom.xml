@@ -49,11 +49,8 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- <dependency>
-			<groupId>com.github.jmnarloch</groupId>
-			<artifactId>modelmapper-spring-boot-starter</artifactId>
-			<version>1.0.1</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>com.github.jmnarloch</groupId> <artifactId>modelmapper-spring-boot-starter</artifactId> 
+			<version>1.0.1</version> </dependency> -->
 
 		<!-- swagger configuration -->
 		<dependency>
@@ -79,6 +76,14 @@
 			<artifactId>sonar-maven-plugin</artifactId>
 			<version>3.6.0.1398</version>
 			<type>pom</type>
+		</dependency>
+	
+		<!-- Lombok for generating getter,setter -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.12</version>
+			<scope>provided</scope>
 		</dependency>
 
 	</dependencies>

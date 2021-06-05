@@ -11,8 +11,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+import lombok.Data;
+
+@Data
 @Entity
+@Table(name="transaction")
 public class Transaction implements Serializable{
 
 	private static final long serialVersionUID = 7570294900213236886L;
@@ -41,54 +46,6 @@ public class Transaction implements Serializable{
 
 	public Transaction() {
 		super();
-	}
-
-	public Double getAmount() {
-		return amount;
-	}
-
-	public void setAmount(Double amount) {
-		this.amount = amount;
-	}
-
-	public Long getTransactionID() {
-		return transactionID;
-	}
-
-	public void setTransactionID(Long transactionID) {
-		this.transactionID = transactionID;
-	}
-
-	public String getTransactionNumber() {
-		return transactionNumber;
-	}
-
-	public void setTransactionNumber(String transactionNumber) {
-		this.transactionNumber = transactionNumber;
-	}
-
-	public Account getReceiverAccount() {
-		return receiverAccount;
-	}
-
-	public void setReceiverAccount(Account receiverAccount) {
-		this.receiverAccount = receiverAccount;
-	}
-
-	public Account getSenderAccount() {
-		return senderAccount;
-	}
-
-	public void setSenderAccount(Account senderAccount) {
-		this.senderAccount = senderAccount;
-	}
-
-	public LocalDateTime getCreatedTime() {
-		return createdTime;
-	}
-
-	public void setCreatedTime(LocalDateTime createdTime) {
-		this.createdTime = createdTime;
 	}
 
 }

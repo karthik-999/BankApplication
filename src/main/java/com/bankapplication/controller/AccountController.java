@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bankapplication.entities.Beneficiery;
 import com.bankapplication.entities.Transaction;
-import com.bankapplication.requests.AccountDetailsDTO;
 import com.bankapplication.requests.AddBeneficiaryDetailsDTO;
 import com.bankapplication.requests.TransferAccountDetailsDTO;
 import com.bankapplication.responses.AccountDetailsResponseDTO;

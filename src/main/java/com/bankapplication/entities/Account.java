@@ -13,11 +13,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.Data;
+
+@Data
 @Entity
+@Table(name="account")
 @JsonIgnoreProperties(value = { "user", "beneficiaryAccounts", "handler",
 		"hibernateLazyInitializer" }, allowSetters = true)
 public class Account implements Serializable {
@@ -44,50 +49,15 @@ public class Account implements Serializable {
 	@JoinColumn(name = "userId", referencedColumnName = "userId")
 	@JsonIgnore
 	private User user;
-	
+
 //	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-//	@JoinColumn(name = "senderAccount", referencedColumnName = "accountId")
+//	@JoinColumn(name = "FromAccount", referencedColumnName = "accountId")
 ////	@JsonIgnore
 //	private List<Transaction> trasactions = new ArrayList<>();
 
-	public Long getAccountId() {
-		return accountId;
+	public Account() {
+		super();
 	}
 
-	public String getAccountNumber() {
-		return accountNumber;
-	}
-
-	public Long getBalance() {
-		return balance;
-	}
-
-	public List<Beneficiery> getBeneficiaryAccounts() {
-		return beneficiaryAccounts;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setAccountId(Long accountId) {
-		this.accountId = accountId;
-	}
-
-	public void setAccountNumber(String accountNumber) {
-		this.accountNumber = accountNumber;
-	}
-
-	public void setBalance(Long balance) {
-		this.balance = balance;
-	}
-
-	public void setBeneficiaryAccounts(List<Beneficiery> beneficiaryAccounts) {
-		this.beneficiaryAccounts = beneficiaryAccounts;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
 
 }
