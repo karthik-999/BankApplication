@@ -75,13 +75,14 @@ public class AccountServiceImpl implements IAccountService {
 	}
 
 	@Override
-	public void deleteAccount(Long accountId) {
+	public ResponseMessage deleteAccount(Long accountId) {
 		Optional<Account> accountWrapper = accountRepository.findByAccountId(accountId);
 		if (accountWrapper.isPresent()) {
 			var account = accountWrapper.get();
 			accountRepository.delete(account);
+			return new ResponseMessage("Successfully Deleted");
 		}
-
+		return new ResponseMessage("Account doesn't Exists - Enter Valid AccountId");
 	}
 
 	@Override

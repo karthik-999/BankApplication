@@ -22,7 +22,7 @@ public interface IAccountService {
 
 	List<AccountDetailsResponseDTO> getAllAccounts(Pageable pageable);
 
-	void deleteAccount(Long accountId);
+	ResponseMessage deleteAccount(Long accountId);
 
 	AccountDetailsResponseDTO getAccount(Long accountId);
 
