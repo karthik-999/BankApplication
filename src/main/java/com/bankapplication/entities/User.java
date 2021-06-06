@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 
@@ -27,15 +28,19 @@ public class User implements Serializable {
 	private Long userId;
 
 	@Column
+	@NotNull
 	private String password;
 
 	@Column
+	@NotNull
 	private String username;
 
 	@Column(name="Email_ID")
+	@NotNull
 	private String email;
 	
 	@Column(name="PhoneNumber")
+	@NotNull
 	private String phoneNumber;
 
 	

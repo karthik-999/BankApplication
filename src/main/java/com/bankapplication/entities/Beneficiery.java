@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 
@@ -24,7 +25,8 @@ public class Beneficiery implements Serializable {
 	private Long beneficieryId;
 
 	@Column(name="beneficieryNumber")
-	private String beneficieryNumber;
+	@NotNull
+	private String beneficieryAccountNumber;
 
 	public Beneficiery() {
 		super();

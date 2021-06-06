@@ -54,7 +54,7 @@ class AccountServiceImplTest {
 		Beneficiery beneficieryaccount = new Beneficiery();
 		beneficieryaccount.setBeneficieryId(3L);
 //		beneficieryaccount.setBeneficieryAccountNumber(account);
-		beneficieryaccount.setBeneficieryNumber("1Z1GZAG3");
+		beneficieryaccount.setBeneficieryAccountNumber("1Z1GZAG3");
 		beneficieryAccounts.add(beneficieryaccount);
 		account.setBeneficiaryAccounts(beneficieryAccounts);
 		Optional<Account> optionalAccount = Optional.of(account);
@@ -75,7 +75,7 @@ class AccountServiceImplTest {
 		Beneficiery beneficieryaccount = new Beneficiery();
 		beneficieryaccount.setBeneficieryId(3L);
 //		beneficieryaccount.setBeneficieryAccountNumber(account);
-		beneficieryaccount.setBeneficieryNumber("1Z1GZAG3");
+		beneficieryaccount.setBeneficieryAccountNumber("1Z1GZAG3");
 		beneficieryAccounts.add(beneficieryaccount);
 		account.setBeneficiaryAccounts(beneficieryAccounts);
 		Optional<Account> optionalAccount = Optional.of(account);
@@ -96,7 +96,7 @@ class AccountServiceImplTest {
 		Beneficiery beneficieryaccount = new Beneficiery();
 		beneficieryaccount.setBeneficieryId(3L);
 //		beneficieryaccount.setBeneficieryAccountNumber(account);
-		beneficieryaccount.setBeneficieryNumber("1Z1GZAG3");
+		beneficieryaccount.setBeneficieryAccountNumber("1Z1GZAG3");
 		beneficieryAccounts.add(beneficieryaccount);
 		account.setBeneficiaryAccounts(beneficieryAccounts);
 //		Optional<Account> optionalAccount = Optional.of(account);
@@ -119,7 +119,7 @@ class AccountServiceImplTest {
 		Beneficiery beneficieryaccount1 = new Beneficiery();
 		beneficieryaccount1.setBeneficieryId(3L);
 //		beneficieryaccount1.setBeneficieryAccountNumber(account);
-		beneficieryaccount1.setBeneficieryNumber("1Z1GZAG3");
+		beneficieryaccount1.setBeneficieryAccountNumber("1Z1GZAG3");
 		beneficieryAccounts1.add(beneficieryaccount1);
 		accountDetailsDTO.setBeneficiaryAccounts(beneficieryAccounts1);
 
@@ -142,7 +142,7 @@ class AccountServiceImplTest {
 		Beneficiery beneficieryaccount = new Beneficiery();
 		beneficieryaccount.setBeneficieryId(3L);
 //		beneficieryaccount.setBeneficieryAccountNumber(account);
-		beneficieryaccount.setBeneficieryNumber("1Z1GZAG3");
+		beneficieryaccount.setBeneficieryAccountNumber("1Z1GZAG3");
 		beneficieryAccounts.add(beneficieryaccount);
 		account.setBeneficiaryAccounts(beneficieryAccounts);
 		User user = new User();
@@ -173,7 +173,7 @@ class AccountServiceImplTest {
 		List<Beneficiery> beneficieryAccounts = new ArrayList<>();
 		Beneficiery beneficieryaccount = new Beneficiery();
 		beneficieryaccount.setBeneficieryId(3L);
-		beneficieryaccount.setBeneficieryNumber("1Z1GZAG3");
+		beneficieryaccount.setBeneficieryAccountNumber("1Z1GZAG3");
 		beneficieryAccounts.add(beneficieryaccount);
 		account.setBeneficiaryAccounts(beneficieryAccounts);
 		User user = new User();
@@ -202,7 +202,7 @@ class AccountServiceImplTest {
 		Beneficiery beneficieryaccount = new Beneficiery();
 		beneficieryaccount.setBeneficieryId(3L);
 //		beneficieryaccount.setBeneficieryAccountNumber(account);
-		beneficieryaccount.setBeneficieryNumber("1Z1GZAG3");
+		beneficieryaccount.setBeneficieryAccountNumber("1Z1GZAG3");
 		beneficieryAccounts.add(beneficieryaccount);
 		account.setBeneficiaryAccounts(beneficieryAccounts);
 //		Optional<Account> optionalAccount = Optional.of(account);
@@ -225,7 +225,7 @@ class AccountServiceImplTest {
 		Beneficiery beneficieryaccount1 = new Beneficiery();
 		beneficieryaccount1.setBeneficieryId(3L);
 //		beneficieryaccount1.setBeneficieryAccountNumber(account);
-		beneficieryaccount1.setBeneficieryNumber("1Z1GZAG3");
+		beneficieryaccount1.setBeneficieryAccountNumber("1Z1GZAG3");
 		beneficieryAccounts1.add(beneficieryaccount1);
 		accountDetailsDTO.setBeneficiaryAccounts(beneficieryAccounts1);
 		accountDetailsDTO.setBalance(999L);
