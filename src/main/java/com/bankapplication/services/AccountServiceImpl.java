@@ -12,6 +12,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.bankapplication.entities.Account;
@@ -23,6 +25,7 @@ import com.bankapplication.requests.AddBeneficiaryDetailsDTO;
 import com.bankapplication.requests.TransferAccountDetailsDTO;
 import com.bankapplication.responses.AccountDetailsResponseDTO;
 import com.bankapplication.responses.BeneficiaryDetailsResponseDTO;
+import com.bankapplication.responses.ResponseMessage;
 import com.bankapplication.services.interfaces.IAccountService;
 import com.bankapplication.services.interfaces.ITransactionService;
 
@@ -126,8 +129,7 @@ public class AccountServiceImpl implements IAccountService {
 		return accountRepository.getByAccountNumber(beneficieryAccountNumber);
 	}
 
-	public void postAmountTransfer(TransferAccountDetailsDTO requestDetails, Account userAccount,
-			Account beneficieryAccount) {
+	public void postAmountTransfer(TransferAccountDetailsDTO requestDetails, Account userAccount, Account beneficieryAccount) {
 		var transaction = new Transaction();
 		transaction.setSenderAccount(userAccount);
 		transaction.setReceiverAccount(beneficieryAccount);
@@ -137,8 +139,7 @@ public class AccountServiceImpl implements IAccountService {
 		transactionService.saveTransaction(transaction);
 	}
 
-	public void initiateAmountTransfer(TransferAccountDetailsDTO requestDetails, Account userAccount,
-			Account beneficieryAccount) {
+	public void initiateAmountTransfer(TransferAccountDetailsDTO requestDetails, Account userAccount, Account beneficieryAccount) {
 		Long beneficieryBalance = beneficieryAccount.getBalance() + requestDetails.getAmount();
 		beneficieryAccount.setBalance(beneficieryBalance);
 		Long userBalance = userAccount.getBalance() - requestDetails.getAmount();
@@ -146,8 +147,7 @@ public class AccountServiceImpl implements IAccountService {
 		saveAccount(userAccount);
 	}
 
-	public synchronized void initiateTransfer(TransferAccountDetailsDTO transferAccountDetailsDTO, Account userAccount,
-			Account beneficieryAccount) {
+	public synchronized void initiateTransfer(TransferAccountDetailsDTO transferAccountDetailsDTO, Account userAccount, Account beneficieryAccount) {
 		// if beneficiaryAccount is in list of beneficiaries then execute transfer..
 		for (Beneficiery beneficiery : userAccount.getBeneficiaryAccounts()) {
 			if (beneficiery.getBeneficieryNumber().equals(beneficieryAccount.getAccountNumber())) {
@@ -158,8 +158,36 @@ public class AccountServiceImpl implements IAccountService {
 	}
 
 	public boolean isValidRequest(TransferAccountDetailsDTO transferAccountDetailsDTO) {
-		return (null != transferAccountDetailsDTO && transferAccountDetailsDTO.getUserAccountNumber() != null
-				&& transferAccountDetailsDTO.getBeneficieryAccountNumber() != null
+		return (null != transferAccountDetailsDTO && transferAccountDetailsDTO.getUserAccountNumber() != null && transferAccountDetailsDTO.getBeneficieryAccountNumber() != null
 				&& transferAccountDetailsDTO.getAmount() > 0);
+	}
+
+	public ResponseMessage fundTransfer(TransferAccountDetailsDTO transferAccountDetailsDTO) {
+
+		// validate request
+		if (!isValidRequest(transferAccountDetailsDTO)) {
+
+			return new ResponseMessage("Check Request Details");
 		}
+
+		var userAccount = getByAccount(transferAccountDetailsDTO.getUserAccountNumber());
+		var beneficieryAccount = getByAccount(transferAccountDetailsDTO.getBeneficieryAccountNumber());
+
+		//check Accounts are valid and have balance..
+		if (null != userAccount && null != beneficieryAccount) {
+
+			if (userAccount.getBalance() <= 0 && (userAccount.getBalance() < transferAccountDetailsDTO.getAmount())) {
+				return new ResponseMessage("Balance Insufficient - Please add Amount");
+			}
+
+			// initiate transfer..
+			if (userAccount.getBeneficiaryAccounts() != null && !userAccount.getBeneficiaryAccounts().isEmpty()) {
+				initiateTransfer(transferAccountDetailsDTO, userAccount, beneficieryAccount);
+				return new ResponseMessage("Amount Transferred");
+			}
+
+		}
+		return new ResponseMessage("Enter Correct Account numbers to process");
+	}
+
 }

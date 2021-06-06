@@ -12,6 +12,7 @@ import com.bankapplication.requests.AddBeneficiaryDetailsDTO;
 import com.bankapplication.requests.TransferAccountDetailsDTO;
 import com.bankapplication.responses.AccountDetailsResponseDTO;
 import com.bankapplication.responses.BeneficiaryDetailsResponseDTO;
+import com.bankapplication.responses.ResponseMessage;
 
 public interface IAccountService {
 
@@ -41,5 +42,7 @@ public interface IAccountService {
 			Account beneficieryAccount);
 
 	boolean isValidRequest(@Valid TransferAccountDetailsDTO transferAccountDetailsDTO);
+
+	ResponseMessage fundTransfer(@Valid TransferAccountDetailsDTO transferAccountDetailsDTO);
 
 }
