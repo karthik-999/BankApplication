@@ -1,5 +1,5 @@
 server:
-  port: 8181
+  port: 8182
   servlet:
     application-display-name: training-exercise-2
 spring:
@@ -27,5 +27,3 @@ logging:
     '[org.springframework.web]': ERROR
     '[com.maybatch.training]': DEBUG
     '[org.hibernate]': INFO
-  file: /logs/application.log  
-    
