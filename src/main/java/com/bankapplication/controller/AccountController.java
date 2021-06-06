@@ -1,9 +1,14 @@
 package com.bankapplication.controller;
 
+import com.bankapplication.requests.AddBeneficiaryDetailsDTO;
+import com.bankapplication.requests.TransferAccountDetailsDTO;
+import com.bankapplication.responses.AccountDetailsResponseDTO;
+import com.bankapplication.responses.BeneficiaryDetailsResponseDTO;
+import com.bankapplication.responses.ResponseMessage;
+import com.bankapplication.services.interfaces.IAccountService;
+import com.bankapplication.services.interfaces.ITransactionService;
 import java.util.List;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,20 +24,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bankapplication.requests.AddBeneficiaryDetailsDTO;
-import com.bankapplication.requests.TransferAccountDetailsDTO;
-import com.bankapplication.responses.AccountDetailsResponseDTO;
-import com.bankapplication.responses.BeneficiaryDetailsResponseDTO;
-import com.bankapplication.responses.ResponseMessage;
-import com.bankapplication.services.interfaces.IAccountService;
-import com.bankapplication.services.interfaces.ITransactionService;
-
 @RestController
 @RequestMapping("/account")
 public class AccountController {
 
 	@Autowired
 	public IAccountService accountService;
+
 	@Autowired
 	public ITransactionService transactionService;
 
@@ -56,15 +54,17 @@ public class AccountController {
 
 	// add beneficiary
 	@PutMapping("/beneficiary/add")
-	public ResponseEntity<BeneficiaryDetailsResponseDTO> updateAccount(@RequestBody AddBeneficiaryDetailsDTO accountDetails) {
-		var accountDetailsResponseDTO = accountService.updateAccount(accountDetails);
-		return new ResponseEntity<>(accountDetailsResponseDTO, HttpStatus.OK);
+	public ResponseEntity<BeneficiaryDetailsResponseDTO> updateAccount(
+			@RequestBody AddBeneficiaryDetailsDTO accountDetails) {
+		var accountDetailsResponse = accountService.updateAccount(accountDetails);
+		return new ResponseEntity<>(accountDetailsResponse, HttpStatus.OK);
 	}
 
 	// transfer amount to beneficiary Account
 	@PostMapping("/fundTransfer")
-	public ResponseEntity<ResponseMessage> accountTransfer(@Valid @RequestBody TransferAccountDetailsDTO transferAccountDetailsDTO) {
-		return new ResponseEntity<>(accountService.fundTransfer(transferAccountDetailsDTO), HttpStatus.OK);
+	public ResponseEntity<ResponseMessage> accountTransfer(
+			@Valid @RequestBody TransferAccountDetailsDTO transferAccountDetails) {
+		return new ResponseEntity<>(accountService.fundTransfer(transferAccountDetails), HttpStatus.OK);
 	}
 
 }

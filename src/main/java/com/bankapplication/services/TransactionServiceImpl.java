@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.bankapplication.entities.Transaction;
 import com.bankapplication.repositories.TransactionRepository;
-import com.bankapplication.requests.TransactionDetailsDTO;
 import com.bankapplication.responses.TransactionDetailsResponseDTO;
 import com.bankapplication.services.interfaces.ITransactionService;
 
@@ -20,18 +19,12 @@ public class TransactionServiceImpl implements ITransactionService {
 
 	@Autowired
 	TransactionRepository transactionRepository;
-	
-	@Override
-	public TransactionDetailsResponseDTO saveTransaction(TransactionDetailsDTO transactionDTO) {
-
-		return null;
-	}
 
 	@Override
 	public List<TransactionDetailsResponseDTO> getAllTransactions(Pageable pageable) {
 		var transactionDetailsResponseDTOs = new ArrayList<TransactionDetailsResponseDTO>();
 		var transactionDetailsResponseDTO = new TransactionDetailsResponseDTO();
-		Page<Transaction>transactionPages = transactionRepository.findAll(pageable);
+		Page<Transaction> transactionPages = transactionRepository.findAll(pageable);
 		var transactions = transactionPages.getContent();
 		for (Transaction transaction : transactions) {
 			BeanUtils.copyProperties(transaction, transactionDetailsResponseDTO);

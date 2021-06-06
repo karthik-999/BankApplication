@@ -17,35 +17,31 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="transaction")
-public class Transaction implements Serializable{
+@Table(name = "transaction")
+public class Transaction implements Serializable {
 
-	private static final long serialVersionUID = 7570294900213236886L;
+    private static final long serialVersionUID = 7570294900213236886L;
 
-	@Id
-	@Column
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Long transactionID;
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long transactionID;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FromAccount", referencedColumnName = "accountId")
-	private Account senderAccount;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FromAccount", referencedColumnName = "accountId")
+    private Account senderAccount;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "ToAccount", referencedColumnName = "accountId")
-	private Account receiverAccount;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ToAccount", referencedColumnName = "accountId")
+    private Account receiverAccount;
 
-	@Column(name = "Transaction_ID")
-	private String transactionNumber;
+    @Column(name = "Transaction_ID")
+    private String transactionNumber;
 
-	@Column(name = "TransferredAmount")
-	private Double amount;
+    @Column(name = "TransferredAmount")
+    private Double amount;
 
-	@Column(name="createdTime")
-	private LocalDateTime createdTime;
-
-	public Transaction() {
-		super();
-	}
+    @Column(name = "createdTime")
+    private LocalDateTime createdTime;
 
 }

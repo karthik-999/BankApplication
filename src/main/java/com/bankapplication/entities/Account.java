@@ -1,9 +1,10 @@
 package com.bankapplication.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,50 +15,35 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name="account")
+@Table(name = "account")
 @JsonIgnoreProperties(value = { "user", "beneficiaryAccounts", "handler",
-		"hibernateLazyInitializer" }, allowSetters = true)
+"hibernateLazyInitializer" }, allowSetters = true)
 public class Account implements Serializable {
 
-	private static final long serialVersionUID = -9197902894043148898L;
+    private static final long serialVersionUID = 8934534019581241194L;
 
-	@Column
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long accountId;
+    @Column
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long accountId;
 
-	@Column
-	private String accountNumber;
+    @Column
+    private String accountNumber;
 
-	@Column
-	private Long balance;
+    @Column
+    private Long balance;
 
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "userAccount", referencedColumnName = "accountId")
-//	@JsonIgnore
-	private List<Beneficiery> beneficiaryAccounts = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "userAccount", referencedColumnName = "accountId")
+    private List<Beneficiery> beneficiaryAccounts = new ArrayList<>();
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "userId", referencedColumnName = "userId")
-	@JsonIgnore
-	private User user;
-
-//	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-//	@JoinColumn(name = "FromAccount", referencedColumnName = "accountId")
-////	@JsonIgnore
-//	private List<Transaction> trasactions = new ArrayList<>();
-
-	public Account() {
-		super();
-	}
-
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userId", referencedColumnName = "userId")
+    @JsonIgnore
+    private User user;
 
 }

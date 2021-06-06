@@ -14,23 +14,18 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="beneficiery")
+@Table(name = "beneficiery")
 public class Beneficiery implements Serializable {
 
-	private static final long serialVersionUID = 6382746836896590486L;
+    private static final long serialVersionUID = 6382746836896590486L;
 
-	@Column
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Long beneficieryId;
+    @Column
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long beneficieryId;
 
-	@Column(name="beneficieryNumber")
-	@NotNull
-	private String beneficieryAccountNumber;
-
-	public Beneficiery() {
-		super();
-	}
-
+    @Column(name = "beneficieryNumber")
+    @NotNull
+    private String beneficieryAccountNumber;
 
 }

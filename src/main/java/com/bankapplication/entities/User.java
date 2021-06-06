@@ -18,39 +18,34 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public class User implements Serializable {
 
-	private static final long serialVersionUID = 4477385203237884894L;
+    private static final long serialVersionUID = 4477385203237884894L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Long userId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long userId;
 
-	@Column
-	@NotNull
-	private String password;
+    @Column
+    @NotNull
+    private String password;
 
-	@Column
-	@NotNull
-	private String username;
+    @Column
+    @NotNull
+    private String username;
 
-	@Column(name="Email_ID")
-	@NotNull
-	private String email;
-	
-	@Column(name="PhoneNumber")
-	@NotNull
-	private String phoneNumber;
+    @Column(name = "Email_ID")
+    @NotNull
+    private String email;
 
-	
-	@OneToMany(cascade = CascadeType.ALL ,orphanRemoval = true)
-	@JoinColumn(name = "userId",referencedColumnName = "userId")
+    @Column(name = "PhoneNumber")
+    @NotNull
+    private String phoneNumber;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "userId", referencedColumnName = "userId")
 //	@JsonIgnore
-	private List<Account> userAccounts;
-
-	public User() {
-
-	}
+    private List<Account> userAccounts;
 
 }
