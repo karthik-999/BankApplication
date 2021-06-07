@@ -49,12 +49,8 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/com.github.jmnarloch/modelmapper-spring-boot-starter -->
-		<dependency>
-			<groupId>com.github.jmnarloch</groupId>
-			<artifactId>modelmapper-spring-boot-starter</artifactId>
-			<version>1.0.1</version>
-		</dependency>
+		<!-- <dependency> <groupId>com.github.jmnarloch</groupId> <artifactId>modelmapper-spring-boot-starter</artifactId> 
+			<version>1.0.1</version> </dependency> -->
 
 		<!-- swagger configuration -->
 		<dependency>
@@ -81,6 +77,15 @@
 			<version>3.6.0.1398</version>
 			<type>pom</type>
 		</dependency>
+	
+		<!-- Lombok for generating getter,setter -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.20</version>
+			<scope>provided</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -93,7 +98,7 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.0</version>
+				<version>0.8.5</version>
 				<executions>
 					<execution>
 						<id>default-prepare-agent</id>

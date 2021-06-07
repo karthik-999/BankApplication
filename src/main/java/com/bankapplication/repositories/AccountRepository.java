@@ -13,4 +13,7 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
 	//jpaRepositories sample
 		public Optional<Account> findByAccountId(Long accountId);
 
+		public Account getByAccountNumber(String beneficieryAccountNumber);
+
+
 }

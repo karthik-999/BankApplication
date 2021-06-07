@@ -1,52 +1,31 @@
 package com.bankapplication.entities;
 
-import javax.persistence.CascadeType;
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
+import lombok.Data;
+
+@Data
 @Entity
-public class Beneficiery {
+@Table(name = "beneficiery")
+public class Beneficiery implements Serializable {
 
-	@Column
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Long beneficieryId;
+    private static final long serialVersionUID = 6382746836896590486L;
 
-	@Column
-	private String beneficieryNumber;
+    @Column
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long beneficieryId;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "accountId")
-	private Account beneficieryAccountNumber;
-
-	public Long getBeneficieryId() {
-		return beneficieryId;
-	}
-
-	public void setBeneficieryId(Long beneficieryId) {
-		this.beneficieryId = beneficieryId;
-	}
-
-	public String getBeneficieryNumber() {
-		return beneficieryNumber;
-	}
-
-	public void setBeneficieryNumber(String beneficieryNumber) {
-		this.beneficieryNumber = beneficieryNumber;
-	}
-
-	public Account getBeneficieryAccountNumber() {
-		return beneficieryAccountNumber;
-	}
-
-	public void setBeneficieryAccountNumber(Account beneficieryAccountNumber) {
-		this.beneficieryAccountNumber = beneficieryAccountNumber;
-	}
+    @Column(name = "beneficieryNumber")
+    @NotNull
+    private String beneficieryAccountNumber;
 
 }
