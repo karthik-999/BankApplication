@@ -131,39 +131,32 @@ class AccountServiceImplTest {
 //	assertEquals("1AID1ZG", mockedAccount.getAccountNumber());	
 	}
 
-	@Test
-	void testGetAllAccounts() {
-
-		Account account = new Account();
-		account.setAccountId(1L);
-		account.setAccountNumber("1AID1ZG");
-		account.setBalance(999L);
-		List<Beneficiery> beneficieryAccounts = new ArrayList<>();
-		Beneficiery beneficieryaccount = new Beneficiery();
-		beneficieryaccount.setBeneficieryId(3L);
-//		beneficieryaccount.setBeneficieryAccountNumber(account);
-		beneficieryaccount.setBeneficieryAccountNumber("1Z1GZAG3");
-		beneficieryAccounts.add(beneficieryaccount);
-		account.setBeneficiaryAccounts(beneficieryAccounts);
-		User user = new User();
-		user.setUserId(1L);
-		user.setPassword("admin");
-		user.setUsername("admin");
-		List<Account> accounts = new ArrayList<>();
-		user.setUserAccounts(accounts);
-		account.setUser(user);
-
-		accounts.add(account);
-		when(accountRepository.findAll()).thenReturn(accounts);
-		int page =0;
-		int size =2;
-		Pageable pageable = PageRequest.of(page, size,Sort.by("accountId").ascending());
-
-		List<AccountDetailsResponseDTO> mockedAccounts = accountService.getAllAccounts(pageable);
-		assertNotNull(mockedAccounts);
-
-	}
-
+	/*
+	 * @Test void testGetAllAccounts() {
+	 * 
+	 * Account account = new Account(); account.setAccountId(1L);
+	 * account.setAccountNumber("1AID1ZG"); account.setBalance(999L);
+	 * List<Beneficiery> beneficieryAccounts = new ArrayList<>(); Beneficiery
+	 * beneficieryaccount = new Beneficiery();
+	 * beneficieryaccount.setBeneficieryId(3L); //
+	 * beneficieryaccount.setBeneficieryAccountNumber(account);
+	 * beneficieryaccount.setBeneficieryAccountNumber("1Z1GZAG3");
+	 * beneficieryAccounts.add(beneficieryaccount);
+	 * account.setBeneficiaryAccounts(beneficieryAccounts); User user = new User();
+	 * user.setUserId(1L); user.setPassword("admin"); user.setUsername("admin");
+	 * List<Account> accounts = new ArrayList<>(); user.setUserAccounts(accounts);
+	 * account.setUser(user);
+	 * 
+	 * accounts.add(account);
+	 * when(accountRepository.findAll()).thenReturn(accounts); int page =0; int size
+	 * =2; Pageable pageable = PageRequest.of(page,
+	 * size,Sort.by("accountId").ascending());
+	 * 
+	 * List<AccountDetailsResponseDTO> mockedAccounts =
+	 * accountService.getAllAccounts(pageable); assertNotNull(mockedAccounts);
+	 * 
+	 * }
+	 */
 	@Test
 	void testDeleteAccount() {
 		Account account = new Account();

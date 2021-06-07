@@ -161,7 +161,7 @@ public class AccountServiceImpl implements IAccountService {
         && transferAccountDetailsDTO.getAmount() > 0);
   }
 
-  public ResponseMessage fundTransfer(TransferAccountDetailsDTO transferAccountDetailsDTO) {
+  public synchronized ResponseMessage fundTransfer(TransferAccountDetailsDTO transferAccountDetailsDTO) {
 
     // validate request
     if (!isValidRequest(transferAccountDetailsDTO)) {

@@ -21,7 +21,7 @@ public class Beneficiery implements Serializable {
 
     @Column
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long beneficieryId;
 
     @Column(name = "beneficieryNumber")

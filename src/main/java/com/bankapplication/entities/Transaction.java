@@ -24,7 +24,7 @@ public class Transaction implements Serializable {
 
     @Id
     @Column
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long transactionID;
 
     @ManyToOne(cascade = CascadeType.ALL)

@@ -15,7 +15,9 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
     show-sql: true
-
+sonar:
+  host:
+    url:http://localhost:9000/
     
 #logging properties (SLF4J)
 #logging pattern for console
