@@ -1,10 +1,18 @@
 package com.bankapplication.controller;
 
+import com.bankapplication.requests.AddBeneficiaryDetailsDTO;
+import com.bankapplication.requests.TransferAccountDetailsDTO;
+import com.bankapplication.responses.AccountDetailsResponseDTO;
+import com.bankapplication.responses.BeneficiaryDetailsResponseDTO;
+import com.bankapplication.responses.ResponseMessage;
+import com.bankapplication.services.interfaces.IAccountService;
+import com.bankapplication.services.interfaces.ITransactionService;
 import java.util.List;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,87 +24,47 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bankapplication.entities.Account;
-import com.bankapplication.entities.Beneficiery;
-import com.bankapplication.requests.AccountDetailsDTO;
-import com.bankapplication.requests.TransferAccountDetailsDTO;
-import com.bankapplication.responses.AccountDetailsResponseDTO;
-import com.bankapplication.responses.ResponseMessage;
-import com.bankapplication.services.interfaces.IAccountService;
-
 @RestController
-@RequestMapping("/accounts")
+@RequestMapping("/account")
 public class AccountController {
 
 	@Autowired
-	IAccountService accountService;
+	public IAccountService accountService;
 
-	@PostMapping("/add/account")
-	public ResponseEntity<AccountDetailsResponseDTO> addAccount(@RequestBody AccountDetailsDTO accountDetails) {
-		AccountDetailsResponseDTO accountDetailsResponseDTO = accountService.saveAccount(accountDetails);
-		return new ResponseEntity<>(accountDetailsResponseDTO, HttpStatus.CREATED);
-	}
+	@Autowired
+	public ITransactionService transactionService;
 
-	@PutMapping("/update/account")
-	public ResponseEntity<AccountDetailsResponseDTO> updateAccount(@RequestBody AccountDetailsDTO accountDetails) {
-		AccountDetailsResponseDTO accountDetailsResponseDTO = accountService.saveAccount(accountDetails);
-		return new ResponseEntity<>(accountDetailsResponseDTO, HttpStatus.OK);
-
-	}
-
-	@GetMapping("/get/accounts")
-	public ResponseEntity<List<AccountDetailsResponseDTO>> getAccounts() {
-		List<AccountDetailsResponseDTO> accounts = accountService.getAllAccounts();
+	@GetMapping("/all/{page}/{size}")
+	public ResponseEntity<List<AccountDetailsResponseDTO>> getAccounts(@PathVariable int page, @PathVariable int size) {
+		Pageable pageable = PageRequest.of(page, size, Sort.by("accountId").ascending());
+		List<AccountDetailsResponseDTO> accounts = accountService.getAllAccounts(pageable);
 		return new ResponseEntity<>(accounts, HttpStatus.OK);
 	}
 
-	@GetMapping("/get/account/{accountId}")
-	public ResponseEntity<Account> getAccount(@PathVariable Long accountId) {
-		Account account = accountService.getAccount(accountId);
+	@GetMapping("/get/{accountId}")
+	public ResponseEntity<AccountDetailsResponseDTO> getAccount(@PathVariable Long accountId) {
+		var account = accountService.getAccount(accountId);
 		return new ResponseEntity<>(account, HttpStatus.OK);
 	}
 
-	@DeleteMapping("/delete/account/{accountId}")
+	@DeleteMapping("/delete/{accountId}")
 	public ResponseEntity<ResponseMessage> deleteAccount(@PathVariable Long accountId) {
-		accountService.deleteAccount(accountId);
-		return new ResponseEntity<>(new ResponseMessage("Successfully Deleted"), HttpStatus.OK);
+		return new ResponseEntity<>(accountService.deleteAccount(accountId), HttpStatus.OK);
 	}
 
-	// Add Beneficiary
-	
-	// Update beneficiaries
-	// Delete Beneficiary
-	// Get Beneficiaries
+	// add beneficiary
+	@PutMapping("/beneficiary/add")
+	public ResponseEntity<BeneficiaryDetailsResponseDTO> updateAccount(
+			@RequestBody AddBeneficiaryDetailsDTO accountDetails) {
+		var accountDetailsResponse = accountService.updateAccount(accountDetails);
+		return new ResponseEntity<>(accountDetailsResponse, HttpStatus.OK);
+	}
 
-	// transfer amount to beneficiary
-	@PostMapping("/amount/transfer")
+	// transfer amount to beneficiary Account
+	@PostMapping("/fundTransfer")
 	public ResponseEntity<ResponseMessage> accountTransfer(
-			@Valid @RequestBody TransferAccountDetailsDTO requestDetails) {
-		synchronized (this) {
-
-			if (null != requestDetails) {
-				// if beneficiaryAccount is in list of beneficiaries then execute transfer..
-				Account userAccount = accountService.getByAccount(requestDetails.getUserAccountId());
-				Account beneficieryAccount = accountService.getByAccount(requestDetails.getBeneficiaryAccountId());
-				for (Beneficiery account : userAccount.getBeneficiaryAccounts()) {
-					if (account.getBeneficieryAccountNumber().equals(beneficieryAccount)) {
-						// initiate transfer..
-						Long beneficieryBalance = beneficieryAccount.getBalance() + requestDetails.getAmount();
-						beneficieryAccount.setBalance(beneficieryBalance);
-						Long userBalance = userAccount.getBalance() - requestDetails.getAmount();
-						userAccount.setBalance(userBalance);
-						accountService.saveAccount(userAccount);
-						return new ResponseEntity<>(new ResponseMessage("Succesfully transferred Money to Beneficiery Account"),HttpStatus.OK);
-
-					}
-
-				}
-			}
-			return new ResponseEntity<>(
-					new ResponseMessage("Check Request Details - Account should be Beneficiary to transfer Money"),	HttpStatus.BAD_REQUEST);
-
-		}
-
+			@Valid @RequestBody TransferAccountDetailsDTO transferAccountDetails) {
+		return new ResponseEntity<>(accountService.fundTransfer(transferAccountDetails), HttpStatus.OK);
 	}
 
 }

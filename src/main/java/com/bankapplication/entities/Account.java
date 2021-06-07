@@ -1,7 +1,10 @@
 package com.bankapplication.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,76 +14,36 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import lombok.Data;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
+@Data
 @Entity
+@Table(name = "account")
 @JsonIgnoreProperties(value = { "user", "beneficiaryAccounts", "handler",
-		"hibernateLazyInitializer" }, allowSetters = true)
-public class Account {
+"hibernateLazyInitializer" }, allowSetters = true)
+public class Account implements Serializable {
 
-	@Column
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long accountId;
+    private static final long serialVersionUID = 8934534019581241194L;
 
-	@Column
-	private String accountNumber;
+    @Column
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long accountId;
 
-	@Column
-	private Long balance;
+    @Column
+    private String accountNumber;
 
-	@OneToMany(cascade = CascadeType.ALL ,orphanRemoval = true)
-	@JoinColumn(name = "beneficiaryAccount",referencedColumnName = "accountId")
-//	@JsonIgnore
-	private List<Beneficiery> beneficiaryAccounts;
+    @Column
+    private Long balance;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "userId", referencedColumnName = "userId")
-//	@JsonIgnore
-	private User user;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "userAccount", referencedColumnName = "accountId")
+    private List<Beneficiery> beneficiaryAccounts = new ArrayList<>();
 
-	public Long getAccountId() {
-		return accountId;
-	}
-
-	public String getAccountNumber() {
-		return accountNumber;
-	}
-
-	public Long getBalance() {
-		return balance;
-	}
-
-	public List<Beneficiery> getBeneficiaryAccounts() {
-		return beneficiaryAccounts;
-	}
-
-	
-	
-	
-	public User getUser() {
-		return user;
-	}
-
-	public void setAccountId(Long accountId) {
-		this.accountId = accountId;
-	}
-
-	public void setAccountNumber(String accountNumber) {
-		this.accountNumber = accountNumber;
-	}
-
-	public void setBalance(Long balance) {
-		this.balance = balance;
-	}
-
-	public void setBeneficiaryAccounts(List<Beneficiery> beneficiaryAccounts) {
-		this.beneficiaryAccounts = beneficiaryAccounts;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userId", referencedColumnName = "userId")
+    @JsonIgnore
+    private User user;
 
 }

@@ -1,5 +1,5 @@
 server:
-  port: 8182
+  port: 8181
   servlet:
     application-display-name: training-exercise-2
 spring:
@@ -15,9 +15,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
     show-sql: true
-sonar:
-  host:
-    url:http://localhost:9000/
+
     
 #logging properties (SLF4J)
 #logging pattern for console
@@ -29,3 +27,5 @@ logging:
     '[org.springframework.web]': ERROR
     '[com.maybatch.training]': DEBUG
     '[org.hibernate]': INFO
+  file: /logs/application.log  
+    

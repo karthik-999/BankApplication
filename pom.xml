@@ -49,12 +49,8 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/com.github.jmnarloch/modelmapper-spring-boot-starter -->
-		<dependency>
-			<groupId>com.github.jmnarloch</groupId>
-			<artifactId>modelmapper-spring-boot-starter</artifactId>
-			<version>1.0.1</version>
-		</dependency>
+		<!-- <dependency> <groupId>com.github.jmnarloch</groupId> <artifactId>modelmapper-spring-boot-starter</artifactId> 
+			<version>1.0.1</version> </dependency> -->
 
 		<!-- swagger configuration -->
 		<dependency>
@@ -74,6 +70,22 @@
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 
+		<!-- Sonar -->
+		<dependency>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>sonar-maven-plugin</artifactId>
+			<version>3.6.0.1398</version>
+			<type>pom</type>
+		</dependency>
+	
+		<!-- Lombok for generating getter,setter -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.20</version>
+			<scope>provided</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -82,7 +94,27 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.5</version>
+				<executions>
+					<execution>
+						<id>default-prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
-
 </project>
