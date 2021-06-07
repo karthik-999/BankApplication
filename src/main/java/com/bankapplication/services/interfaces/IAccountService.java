@@ -18,8 +18,6 @@ public interface IAccountService {
 
 	Account getByAccount(Long accountId);
 
-	AccountDetailsResponseDTO saveAccount(AccountDetailsDTO accountDTO);
-
 	List<AccountDetailsResponseDTO> getAllAccounts(Pageable pageable);
 
 	ResponseMessage deleteAccount(Long accountId);

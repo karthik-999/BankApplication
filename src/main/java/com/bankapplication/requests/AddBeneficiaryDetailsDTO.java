@@ -18,8 +18,4 @@ public class AddBeneficiaryDetailsDTO {
 
 	private List<Beneficiery> beneficiaryAccounts = new ArrayList<>();
 
-	public AddBeneficiaryDetailsDTO() {
-		super();
-	}
-
 }
