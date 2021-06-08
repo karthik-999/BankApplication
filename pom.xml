@@ -77,14 +77,21 @@
 			<version>3.6.0.1398</version>
 			<type>pom</type>
 		</dependency>
-	
-		<!-- Lombok for generating getter,setter -->
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.18.20</version>
 			<scope>provided</scope>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+		</dependency>
+
+
 
 	</dependencies>
 

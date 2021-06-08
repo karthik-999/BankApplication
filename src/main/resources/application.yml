@@ -1,20 +1,25 @@
 server:
   port: 8182
   servlet:
-    application-display-name: training-exercise-2
+    context-path: /bank-app
+    application-display-name: bank-application
 spring:
+  h2:    console:      enabled: true
+      path: /h2
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    password: root
-    url: jdbc:mysql://localhost:3306/bankApp
-    username: root
+    driver-class-name: org.h2.Driver
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    password: root
+#    url: jdbc:mysql://localhost:3306/bankApp
+#    username: root
   jpa:
     hibernate:
       ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
-    show-sql: true
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true    database-platform: org.hibernate.dialect.H2Dialect
+    
 sonar:
   host:
     url:http://localhost:9000/

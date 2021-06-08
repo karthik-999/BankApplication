@@ -35,14 +35,16 @@ public class AccountController {
 	public ITransactionService transactionService;
 
 	@GetMapping("/all/{page}/{size}")
-	public ResponseEntity<List<AccountDetailsResponseDTO>> getAccounts(@PathVariable int page, @PathVariable int size) {
+	public ResponseEntity<List<AccountDetailsResponseDTO>> getAccounts(
+			@PathVariable(value = "page", required = true) int page,
+			@PathVariable(value = "size", required = true) int size) {
 		Pageable pageable = PageRequest.of(page, size, Sort.by("accountId").ascending());
 		List<AccountDetailsResponseDTO> accounts = accountService.getAllAccounts(pageable);
 		return new ResponseEntity<>(accounts, HttpStatus.OK);
 	}
 
 	@GetMapping("/get/{accountId}")
-	public ResponseEntity<AccountDetailsResponseDTO> getAccount(@PathVariable Long accountId) {
+	public ResponseEntity<AccountDetailsResponseDTO> getAccount(@PathVariable("accountId") Long accountId) {
 		var account = accountService.getAccount(accountId);
 		return new ResponseEntity<>(account, HttpStatus.OK);
 	}
