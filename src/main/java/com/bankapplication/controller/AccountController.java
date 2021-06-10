@@ -31,9 +31,6 @@ public class AccountController {
 	@Autowired
 	public IAccountService accountService;
 
-	@Autowired
-	public ITransactionService transactionService;
-
 	@GetMapping("/all/{page}/{size}")
 	public ResponseEntity<List<AccountDetailsResponseDTO>> getAccounts(
 			@PathVariable(value = "page", required = true) int page,

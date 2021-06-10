@@ -177,17 +177,5 @@ public class AccountServiceImpl implements IAccountService {
 		return new ResponseMessage("Enter Correct Account numbers to process");
 	}
 
-	public synchronized ResponseMessage paymentDeduction(PaymentDetailsRequest paymentDetailsRequest) {
-		var account = getByAccount(paymentDetailsRequest.getAccountNumber());
-		if (null != account && account.getBalance() != null) {
-			if (account.getBalance() <= 0 && (account.getBalance() < paymentDetailsRequest.getPrice())) {
-				return new ResponseMessage("Balance Insufficient - Please add Amount");
-			}
-			var balance = account.getBalance() - paymentDetailsRequest.getPrice();
-			account.setBalance(balance);
-			
-		}
-		return new ResponseMessage("Balance Deducted");
-	}
 
 }
