@@ -50,7 +50,7 @@ class AccountServiceImplTest {
 		account = new Account();
 		account.setAccountId(1L);
 		account.setAccountNumber("1AID1ZG");
-		account.setBalance(999L);
+		account.setBalance(999.0);
 		List<Beneficiery> beneficieryAccounts = new ArrayList<>();
 		Beneficiery beneficieryaccount = new Beneficiery();
 		beneficieryaccount.setBeneficieryId(3L);

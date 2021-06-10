@@ -29,7 +29,7 @@ public class UserServiceImpl implements IUserService {
 			List<Account> accounts = new ArrayList<>();
 			var account = new Account();
 			account.setAccountNumber(UUID.randomUUID().toString().replace("-", "").substring(0, 9));
-			account.setBalance(0L);
+			account.setBalance(0.0);
 			accounts.add(account);
 			user.setUserAccounts(accounts);
 		}

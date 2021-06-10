@@ -20,6 +20,7 @@ import com.bankapplication.entities.Transaction;
 import com.bankapplication.repositories.AccountRepository;
 import com.bankapplication.requests.AccountDetailsDTO;
 import com.bankapplication.requests.AddBeneficiaryDetailsDTO;
+import com.bankapplication.requests.PaymentDetailsRequest;
 import com.bankapplication.requests.TransferAccountDetailsDTO;
 import com.bankapplication.responses.AccountDetailsResponseDTO;
 import com.bankapplication.responses.BeneficiaryDetailsResponseDTO;
@@ -126,9 +127,9 @@ public class AccountServiceImpl implements IAccountService {
 
 	public void initiateAmountTransfer(TransferAccountDetailsDTO requestDetails, Account userAccount,
 			Account beneficieryAccount) {
-		Long beneficieryBalance = beneficieryAccount.getBalance() + requestDetails.getAmount();
+		var beneficieryBalance = beneficieryAccount.getBalance() + requestDetails.getAmount();
 		beneficieryAccount.setBalance(beneficieryBalance);
-		Long userBalance = userAccount.getBalance() - requestDetails.getAmount();
+		var userBalance = userAccount.getBalance() - requestDetails.getAmount();
 		userAccount.setBalance(userBalance);
 		saveAccount(userAccount);
 	}
@@ -175,4 +176,18 @@ public class AccountServiceImpl implements IAccountService {
 		}
 		return new ResponseMessage("Enter Correct Account numbers to process");
 	}
+
+	public synchronized ResponseMessage paymentDeduction(PaymentDetailsRequest paymentDetailsRequest) {
+		var account = getByAccount(paymentDetailsRequest.getAccountNumber());
+		if (null != account && account.getBalance() != null) {
+			if (account.getBalance() <= 0 && (account.getBalance() < paymentDetailsRequest.getPrice())) {
+				return new ResponseMessage("Balance Insufficient - Please add Amount");
+			}
+			var balance = account.getBalance() - paymentDetailsRequest.getPrice();
+			account.setBalance(balance);
+			
+		}
+		return new ResponseMessage("Balance Deducted");
+	}
+
 }

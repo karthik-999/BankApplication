@@ -34,3 +34,4 @@ logging:
     '[org.springframework.web]': ERROR
     '[com.maybatch.training]': DEBUG
     '[org.hibernate]': INFO
+  file: /logs/application.log

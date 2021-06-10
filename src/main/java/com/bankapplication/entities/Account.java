@@ -35,7 +35,7 @@ public class Account implements Serializable {
     private String accountNumber;
 
     @Column
-    private Long balance;
+    private Double balance;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "userAccount", referencedColumnName = "accountId")
