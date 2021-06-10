@@ -14,7 +14,7 @@ public class AddBeneficiaryDetailsDTO {
 
 	private String accountNumber;
 
-	private Long balance;
+	private Double balance;
 
 	private List<Beneficiery> beneficiaryAccounts = new ArrayList<>();
 
