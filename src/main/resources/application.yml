@@ -4,6 +4,7 @@ server:
     context-path: /bank-app
     application-display-name: bank-application
 spring:
+  application:    name: Bank-Payment-App
   h2:    console:      enabled: true
       path: /h2
   datasource:
@@ -35,3 +36,24 @@ logging:
     '[com.maybatch.training]': DEBUG
     '[org.hibernate]': INFO
   file: /logs/application.log
+  
+#Eureka Client
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+#Acutator properties
+management:
+  server:
+    port: 8092
+  endpoints:
+    web:
+      exposure:
+        include:
+        - "*"
+  endpoint:
+    health:
+      show-details: "always"  

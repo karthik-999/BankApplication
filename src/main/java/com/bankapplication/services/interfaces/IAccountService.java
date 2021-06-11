@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import com.bankapplication.entities.Account;
 import com.bankapplication.requests.AccountDetailsDTO;
 import com.bankapplication.requests.AddBeneficiaryDetailsDTO;
+import com.bankapplication.requests.PaymentDetailsRequest;
 import com.bankapplication.requests.TransferAccountDetailsDTO;
 import com.bankapplication.responses.AccountDetailsResponseDTO;
 import com.bankapplication.responses.BeneficiaryDetailsResponseDTO;
@@ -38,6 +39,9 @@ public interface IAccountService {
 
 	void initiateTransfer(@Valid TransferAccountDetailsDTO transferAccountDetailsDTO, Account userAccount,
 			Account beneficieryAccount);
+	
+//	void initiateTransfer(@Valid PaymentDetailsRequest paymentDetailsRequest, Account userAccount,
+//			Account beneficieryAccount);
 
 	boolean isValidRequest(@Valid TransferAccountDetailsDTO transferAccountDetailsDTO);
 

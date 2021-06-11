@@ -30,6 +30,10 @@ public class PaymentServiceImpl implements IPaymentService {
 			var userBalance = account.getBalance() - paymentDetailsRequest.getPrice();
 			account.setBalance(userBalance);
 			accountService.saveAccount(account);
+			paymentDeductionResponseDTO.setMessage("Payment Deducted Succesfully");
+			paymentDeductionResponseDTO.setStatus("Success");
+					
+//			accountService.initiateTransfer(paymentDetailsRequest, userAccount, beneficieryAccount);		
 		}
 
 		return new ResponseEntity<>(paymentDeductionResponseDTO, HttpStatus.ACCEPTED);

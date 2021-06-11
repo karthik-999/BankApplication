@@ -18,7 +18,6 @@ import com.bankapplication.entities.Account;
 import com.bankapplication.entities.Beneficiery;
 import com.bankapplication.entities.Transaction;
 import com.bankapplication.repositories.AccountRepository;
-import com.bankapplication.requests.AccountDetailsDTO;
 import com.bankapplication.requests.AddBeneficiaryDetailsDTO;
 import com.bankapplication.requests.PaymentDetailsRequest;
 import com.bankapplication.requests.TransferAccountDetailsDTO;
@@ -120,7 +119,18 @@ public class AccountServiceImpl implements IAccountService {
 		transaction.setSenderAccount(userAccount);
 		transaction.setReceiverAccount(beneficieryAccount);
 		transaction.setTransactionNumber(UUID.randomUUID().toString().replace("-", "").substring(12, 21));
-		transaction.setAmount(requestDetails.getAmount().doubleValue());
+		transaction.setAmount(requestDetails.getAmount());
+		transaction.setCreatedTime(LocalDateTime.now());
+		transactionService.saveTransaction(transaction);
+	}
+	
+	public void postAmountTransfer(PaymentDetailsRequest  requestDetails, Account userAccount,
+			Account beneficieryAccount) {
+		var transaction = new Transaction();
+		transaction.setSenderAccount(userAccount);
+		transaction.setReceiverAccount(beneficieryAccount);
+		transaction.setTransactionNumber(UUID.randomUUID().toString().replace("-", "").substring(12, 21));
+		transaction.setAmount(requestDetails.getPrice());
 		transaction.setCreatedTime(LocalDateTime.now());
 		transactionService.saveTransaction(transaction);
 	}
@@ -176,6 +186,5 @@ public class AccountServiceImpl implements IAccountService {
 		}
 		return new ResponseMessage("Enter Correct Account numbers to process");
 	}
-
 
 }
